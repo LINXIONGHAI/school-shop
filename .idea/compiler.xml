@@ -8,11 +8,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="school-gateway" />
-        <module name="school-coupon-service" />
-        <module name="school-order-service" />
         <module name="school-common" />
         <module name="school-auth-service" />
         <module name="school-product-service" />
+        <module name="school-order-service" />
+        <module name="school-coupon-service" />
       </profile>
     </annotationProcessing>
   </component>
