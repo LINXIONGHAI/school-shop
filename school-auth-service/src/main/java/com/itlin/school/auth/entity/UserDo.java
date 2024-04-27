@@ -1,5 +1,6 @@
 package com.itlin.school.auth.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
