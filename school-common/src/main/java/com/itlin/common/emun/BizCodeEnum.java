@@ -32,6 +32,10 @@ public enum BizCodeEnum {
 
     ACCOUNT_UNREGISTER(250002, "账号不存在"),
     ACCOUNT_PWD_ERROR(250003, "账号或者密码错误"),
+    /**
+     * 服务异常
+     */
+    SERVICE(240003, "服务超时，稍后重试"),
     ;
 
     private BizCodeEnum(Integer code, String message) {

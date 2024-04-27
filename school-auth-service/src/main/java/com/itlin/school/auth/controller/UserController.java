@@ -1,5 +1,9 @@
 package com.itlin.school.auth.controller;
 
+import com.itlin.common.emun.BizCodeEnum;
+import com.itlin.common.excepetion.BizException;
+import com.itlin.common.util.JsonData;
+import com.itlin.school.auth.entity.UserDo;
 import com.itlin.school.auth.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,8 +27,15 @@ public class UserController {
 
     @GetMapping("get/{user_id}")
     @ApiOperation("根据用户id获取用户信息")
-    public Object get(@PathVariable Long user_id) {
+    public JsonData get(@PathVariable Long user_id) {
         log.info("UserController:get:user_id={}", user_id);
-        return userService.queryById(user_id);
+        try {
+            UserDo userDo = userService.queryById(user_id);
+            return JsonData.buildSuccess(userDo);
+        } catch (Exception e) {
+            log.error("UserController:get:erro={}",e.getMessage());
+            log.error(BizCodeEnum.SERVICE.getMessage());
+            throw new BizException(BizCodeEnum.SERVICE);
+        }
     }
 }
