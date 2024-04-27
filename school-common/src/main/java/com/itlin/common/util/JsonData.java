@@ -51,6 +51,10 @@ public class JsonData {
         return new JsonData(-1, null, msg);
     }
 
+    public static JsonData buildError(String msg,Integer code) {
+        return new JsonData(code, null, msg);
+    }
+
    
     /**
      * 自定义状态码和错误信息
