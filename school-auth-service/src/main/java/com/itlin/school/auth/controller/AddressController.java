@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ public class AddressController {
     @Resource
     private AddressService addressService;
 
-    @RequestMapping("get/{address_id}")
+    @GetMapping("get/{address_id}")
     @ApiOperation("根据地址id获取地址信息")
     public Object get(@ApiParam(required = true,defaultValue = "1") @PathVariable Long address_id){
         log.info("AddressController:get:addressId={}",address_id);
