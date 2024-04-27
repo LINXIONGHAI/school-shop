@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.itlin</groupId>
+    <artifactId>school-shop</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>school-common</module>
+        <module>school-coupon-service</module>
+        <module>school-gateway</module>
+        <module>school-order-service</module>
+        <module>school-product-service</module>
+        <module>school-auth-service</module>
+    </modules>
+
+
+</project>
