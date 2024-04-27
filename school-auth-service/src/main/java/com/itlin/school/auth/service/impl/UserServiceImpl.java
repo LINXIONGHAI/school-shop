@@ -1,5 +1,6 @@
 package com.itlin.school.auth.service.impl;
 
+import com.itlin.redis.util.RedisUtil;
 import com.itlin.school.auth.entity.UserDo;
 import com.itlin.school.auth.dao.UserDao;
 import com.itlin.school.auth.service.UserService;
@@ -17,6 +18,7 @@ import javax.annotation.Resource;
 public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
+
 
     /**
      * 通过ID查询单条数据

@@ -14,6 +14,7 @@
         <module>school-order-service</module>
         <module>school-product-service</module>
         <module>school-auth-service</module>
+        <module>school-redis-framework</module>
     </modules>
 
     <!-- 一般来说父级项目的packaging都为pom，packaging默认类型jar类型-->
@@ -132,6 +133,13 @@
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct-processor</artifactId>
                 <version>1.5.5.Final</version>
+            </dependency>
+
+            <!--kaptcha依赖包-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>kaptcha-spring-boot-starter</artifactId>
+                <version>1.1.0</version>
             </dependency>
 
 

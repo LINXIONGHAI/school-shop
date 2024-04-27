@@ -3,6 +3,7 @@ package com.itlin.school.auth.controller;
 import com.itlin.common.emun.BizCodeEnum;
 import com.itlin.common.excepetion.BizException;
 import com.itlin.common.util.JsonData;
+import com.itlin.redis.util.RedisUtil;
 import com.itlin.school.auth.entity.UserDo;
 import com.itlin.school.auth.service.UserService;
 import io.swagger.annotations.Api;
@@ -25,6 +26,8 @@ public class UserController {
     @Resource
     private UserService userService;
 
+
+
     @GetMapping("get/{user_id}")
     @ApiOperation("根据用户id获取用户信息")
     public JsonData get(@PathVariable Long user_id) {
@@ -38,4 +41,9 @@ public class UserController {
             throw new BizException(BizCodeEnum.SERVICE);
         }
     }
+
+
+
+
+
 }

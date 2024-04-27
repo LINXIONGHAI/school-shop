@@ -12,6 +12,7 @@
         <module name="school-auth-service" />
         <module name="school-product-service" />
         <module name="school-order-service" />
+        <module name="school-redis-framework" />
         <module name="school-coupon-service" />
       </profile>
     </annotationProcessing>
