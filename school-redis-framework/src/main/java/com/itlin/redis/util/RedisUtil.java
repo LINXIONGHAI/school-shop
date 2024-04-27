@@ -23,7 +23,7 @@ public class RedisUtil {
     @Resource
     private RedisTemplate redisTemplate;
 
-    private static final String CACHE_KEY_SEPARATOR = ".";
+    private static final String CACHE_KEY_SEPARATOR = ":";
 
     /**
      * 构建缓存key
