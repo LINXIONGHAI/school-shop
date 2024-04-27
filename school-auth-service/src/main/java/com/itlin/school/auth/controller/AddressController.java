@@ -25,8 +25,8 @@ public class AddressController {
 
     @GetMapping("get/{address_id}")
     @ApiOperation("根据地址id获取地址信息")
-    public Object get(@ApiParam(required = true,defaultValue = "1") @PathVariable Long address_id){
-        log.info("AddressController:get:addressId={}",address_id);
+    public Object get(@ApiParam(required = true, defaultValue = "1") @PathVariable Long address_id) {
+        log.info("AddressController:get:addressId={}", address_id);
         return addressService.queryById(address_id);
     }
 }

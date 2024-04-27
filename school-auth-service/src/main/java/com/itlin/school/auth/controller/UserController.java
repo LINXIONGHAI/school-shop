@@ -23,8 +23,8 @@ public class UserController {
 
     @GetMapping("get/{user_id}")
     @ApiOperation("根据用户id获取用户信息")
-    public Object get(@PathVariable Long user_id){
-        log.info("UserController:get:user_id={}",user_id);
+    public Object get(@PathVariable Long user_id) {
+        log.info("UserController:get:user_id={}", user_id);
         return userService.queryById(user_id);
     }
 }

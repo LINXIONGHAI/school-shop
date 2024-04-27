@@ -43,8 +43,9 @@ public class SwaggerConfiguration {
                 .build();
 
     }
+
     @Bean
-    public Docket adminApiDoc(){
+    public Docket adminApiDoc() {
         return new Docket(DocumentationType.OAS_30)
                 .groupName("管理端接口文档")
                 .pathMapping("/")
@@ -62,7 +63,6 @@ public class SwaggerConfiguration {
     }
 
 
-
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("校园二手购物网")
@@ -71,9 +71,6 @@ public class SwaggerConfiguration {
                 .version("v1")
                 .build();
     }
-
-
-
 
 
 }
