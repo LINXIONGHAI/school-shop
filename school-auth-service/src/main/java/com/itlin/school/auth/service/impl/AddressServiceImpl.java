@@ -1,6 +1,6 @@
 package com.itlin.school.auth.service.impl;
 
-import com.itlin.school.auth.entity.Address;
+import com.itlin.school.auth.entity.AddressDo;
 import com.itlin.school.auth.dao.AddressDao;
 import com.itlin.school.auth.service.AddressService;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class AddressServiceImpl implements AddressService {
      * @return 实例对象
      */
     @Override
-    public Address queryById(Long id) {
+    public AddressDo queryById(Long id) {
         return this.addressDao.queryById(id);
     }
 
@@ -37,7 +37,7 @@ public class AddressServiceImpl implements AddressService {
      * @return 实例对象
      */
     @Override
-    public Address insert(Address address) {
+    public AddressDo insert(AddressDo address) {
         this.addressDao.insert(address);
         return address;
     }
@@ -49,7 +49,7 @@ public class AddressServiceImpl implements AddressService {
      * @return 实例对象
      */
     @Override
-    public Address update(Address address) {
+    public AddressDo update(AddressDo address) {
         this.addressDao.update(address);
         return this.queryById(address.getId());
     }

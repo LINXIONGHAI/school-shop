@@ -1,6 +1,6 @@
 package com.itlin.school.auth.service.impl;
 
-import com.itlin.school.auth.entity.User;
+import com.itlin.school.auth.entity.UserDo;
 import com.itlin.school.auth.dao.UserDao;
 import com.itlin.school.auth.service.UserService;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
      * @return 实例对象
      */
     @Override
-    public User queryById(Object id) {
+    public UserDo queryById(Object id) {
         return this.userDao.queryById(id);
     }
 
@@ -33,25 +33,25 @@ public class UserServiceImpl implements UserService {
     /**
      * 新增数据
      *
-     * @param user 实例对象
+     * @param userDo 实例对象
      * @return 实例对象
      */
     @Override
-    public User insert(User user) {
-        this.userDao.insert(user);
-        return user;
+    public UserDo insert(UserDo userDo) {
+        this.userDao.insert(userDo);
+        return userDo;
     }
 
     /**
      * 修改数据
      *
-     * @param user 实例对象
+     * @param userDo 实例对象
      * @return 实例对象
      */
     @Override
-    public User update(User user) {
-        this.userDao.update(user);
-        return this.queryById(user.getId());
+    public UserDo update(UserDo userDo) {
+        this.userDao.update(userDo);
+        return this.queryById(userDo.getId());
     }
 
     /**

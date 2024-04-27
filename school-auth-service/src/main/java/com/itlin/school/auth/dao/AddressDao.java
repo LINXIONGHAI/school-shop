@@ -1,6 +1,6 @@
 package com.itlin.school.auth.dao;
 
-import com.itlin.school.auth.entity.Address;
+import com.itlin.school.auth.entity.AddressDo;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -18,7 +18,7 @@ public interface AddressDao {
      * @param id 主键
      * @return 实例对象
      */
-    Address queryById(Long id);
+    AddressDo queryById(Long id);
 
 
     /**
@@ -27,7 +27,7 @@ public interface AddressDao {
      * @param address 查询条件
      * @return 总行数
      */
-    long count(Address address);
+    long count(AddressDo address);
 
     /**
      * 新增数据
@@ -35,7 +35,7 @@ public interface AddressDao {
      * @param address 实例对象
      * @return 影响行数
      */
-    int insert(Address address);
+    int insert(AddressDo address);
 
     /**
      * 批量新增数据（MyBatis原生foreach方法）
@@ -43,7 +43,7 @@ public interface AddressDao {
      * @param entities List<Address> 实例对象列表
      * @return 影响行数
      */
-    int insertBatch(@Param("entities") List<Address> entities);
+    int insertBatch(@Param("entities") List<AddressDo> entities);
 
     /**
      * 批量新增或按主键更新数据（MyBatis原生foreach方法）
@@ -52,7 +52,7 @@ public interface AddressDao {
      * @return 影响行数
      * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
      */
-    int insertOrUpdateBatch(@Param("entities") List<Address> entities);
+    int insertOrUpdateBatch(@Param("entities") List<AddressDo> entities);
 
     /**
      * 修改数据
@@ -60,7 +60,7 @@ public interface AddressDao {
      * @param address 实例对象
      * @return 影响行数
      */
-    int update(Address address);
+    int update(AddressDo address);
 
     /**
      * 通过主键删除数据

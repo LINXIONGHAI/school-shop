@@ -1,6 +1,6 @@
 package com.itlin.school.auth.service;
 
-import com.itlin.school.auth.entity.Address;
+import com.itlin.school.auth.entity.AddressDo;
 
 /**
  * 电商-公司收发货地址表(Address)表服务接口
@@ -16,7 +16,7 @@ public interface AddressService {
      * @param id 主键
      * @return 实例对象
      */
-    Address queryById(Long id);
+    AddressDo queryById(Long id);
 
 
     /**
@@ -25,7 +25,7 @@ public interface AddressService {
      * @param address 实例对象
      * @return 实例对象
      */
-    Address insert(Address address);
+    AddressDo insert(AddressDo address);
 
     /**
      * 修改数据
@@ -33,7 +33,7 @@ public interface AddressService {
      * @param address 实例对象
      * @return 实例对象
      */
-    Address update(Address address);
+    AddressDo update(AddressDo address);
 
     /**
      * 通过主键删除数据

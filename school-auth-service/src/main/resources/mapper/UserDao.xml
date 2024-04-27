@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itlin.school.auth.dao.UserDao">
 
-    <resultMap type="com.itlin.school.auth.entity.User" id="UserMap">
+    <resultMap type="com.itlin.school.auth.entity.UserDo" id="UserMap">
         <result property="id" column="id" jdbcType="VARCHAR"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="pwd" column="pwd" jdbcType="VARCHAR"/>
@@ -19,7 +19,7 @@
     <select id="queryById" resultMap="UserMap">
         select
           id, name, pwd, head_img, slogan, sex, points, create_time, mail, secret
-        from user
+        from userDo
         where id = #{id}
     </select>
 
@@ -27,7 +27,7 @@
     <select id="queryAllByLimit" resultMap="UserMap">
         select
           id, name, pwd, head_img, slogan, sex, points, create_time, mail, secret
-        from user
+        from userDo
         <where>
             <if test="id != null">
                 and id = #{id}
@@ -66,7 +66,7 @@
     <!--统计总行数-->
     <select id="count" resultType="java.lang.Long">
         select count(1)
-        from user
+        from userDo
         <where>
             <if test="id != null">
                 and id = #{id}
@@ -103,12 +103,12 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into user(name, pwd, head_img, slogan, sex, points, create_time, mail, secret)
+        insert into userDo(name, pwd, head_img, slogan, sex, points, create_time, mail, secret)
         values (#{name}, #{pwd}, #{headImg}, #{slogan}, #{sex}, #{points}, #{createTime}, #{mail}, #{secret})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into user(name, pwd, head_img, slogan, sex, points, create_time, mail, secret)
+        insert into userDo(name, pwd, head_img, slogan, sex, points, create_time, mail, secret)
         values
         <foreach collection="entities" item="entity" separator=",">
         (#{entity.name}, #{entity.pwd}, #{entity.headImg}, #{entity.slogan}, #{entity.sex}, #{entity.points}, #{entity.createTime}, #{entity.mail}, #{entity.secret})
@@ -116,7 +116,7 @@
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into user(name, pwd, head_img, slogan, sex, points, create_time, mail, secret)
+        insert into userDo(name, pwd, head_img, slogan, sex, points, create_time, mail, secret)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.name}, #{entity.pwd}, #{entity.headImg}, #{entity.slogan}, #{entity.sex}, #{entity.points}, #{entity.createTime}, #{entity.mail}, #{entity.secret})
@@ -135,7 +135,7 @@
 
     <!--通过主键修改数据-->
     <update id="update">
-        update user
+        update userDo
         <set>
             <if test="name != null and name != ''">
                 name = #{name},
@@ -170,7 +170,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from user where id = #{id}
+        delete from userDo where id = #{id}
     </delete>
 
 </mapper>

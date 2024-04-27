@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @since 2024-04-27 21:56:26
  */
 @Data
-public class Address implements Serializable {
+public class AddressDo implements Serializable {
     private static final long serialVersionUID = 172017262177519890L;
     
     private Long id;

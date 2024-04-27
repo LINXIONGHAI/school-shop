@@ -1,6 +1,6 @@
 package com.itlin.school.auth.service;
 
-import com.itlin.school.auth.entity.User;
+import com.itlin.school.auth.entity.UserDo;
 
 /**
  * (User)表服务接口
@@ -16,24 +16,24 @@ public interface UserService {
      * @param id 主键
      * @return 实例对象
      */
-    User queryById(Object id);
+    UserDo queryById(Object id);
 
 
     /**
      * 新增数据
      *
-     * @param user 实例对象
+     * @param userDo 实例对象
      * @return 实例对象
      */
-    User insert(User user);
+    UserDo insert(UserDo userDo);
 
     /**
      * 修改数据
      *
-     * @param user 实例对象
+     * @param userDo 实例对象
      * @return 实例对象
      */
-    User update(User user);
+    UserDo update(UserDo userDo);
 
     /**
      * 通过主键删除数据

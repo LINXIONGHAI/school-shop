@@ -1,6 +1,6 @@
 package com.itlin.school.auth.dao;
 
-import com.itlin.school.auth.entity.User;
+import com.itlin.school.auth.entity.UserDo;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -18,24 +18,24 @@ public interface UserDao {
      * @param id 主键
      * @return 实例对象
      */
-    User queryById(Object id);
+    UserDo queryById(Object id);
 
 
     /**
      * 统计总行数
      *
-     * @param user 查询条件
+     * @param userDo 查询条件
      * @return 总行数
      */
-    long count(User user);
+    long count(UserDo userDo);
 
     /**
      * 新增数据
      *
-     * @param user 实例对象
+     * @param userDo 实例对象
      * @return 影响行数
      */
-    int insert(User user);
+    int insert(UserDo userDo);
 
     /**
      * 批量新增数据（MyBatis原生foreach方法）
@@ -43,7 +43,7 @@ public interface UserDao {
      * @param entities List<User> 实例对象列表
      * @return 影响行数
      */
-    int insertBatch(@Param("entities") List<User> entities);
+    int insertBatch(@Param("entities") List<UserDo> entities);
 
     /**
      * 批量新增或按主键更新数据（MyBatis原生foreach方法）
@@ -52,15 +52,15 @@ public interface UserDao {
      * @return 影响行数
      * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
      */
-    int insertOrUpdateBatch(@Param("entities") List<User> entities);
+    int insertOrUpdateBatch(@Param("entities") List<UserDo> entities);
 
     /**
      * 修改数据
      *
-     * @param user 实例对象
+     * @param userDo 实例对象
      * @return 影响行数
      */
-    int update(User user);
+    int update(UserDo userDo);
 
     /**
      * 通过主键删除数据
