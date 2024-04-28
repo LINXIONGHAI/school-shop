@@ -100,6 +100,46 @@
             </if>
         </where>
     </select>
+    <select id="query" resultType="com.itlin.school.auth.entity.AddressDo">
+        select *
+        from address
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="defaultStatus != null">
+                and default_status = #{defaultStatus}
+            </if>
+            <if test="receiveName != null and receiveName != ''">
+                and receive_name = #{receiveName}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="province != null and province != ''">
+                and province = #{province}
+            </if>
+            <if test="city != null and city != ''">
+                and city = #{city}
+            </if>
+            <if test="region != null and region != ''">
+                and region = #{region}
+            </if>
+            <if test="detailAddress != null and detailAddress != ''">
+                and detail_address = #{detailAddress}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+        </where>
+
+
+
+
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

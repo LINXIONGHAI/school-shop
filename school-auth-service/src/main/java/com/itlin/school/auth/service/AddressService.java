@@ -1,7 +1,10 @@
 package com.itlin.school.auth.service;
 
 import com.itlin.school.auth.bo.AddressBo;
+import com.itlin.school.auth.dto.UserResDto;
 import com.itlin.school.auth.entity.AddressDo;
+
+import java.util.List;
 
 /**
  * 电商-公司收发货地址表(Address)表服务接口
@@ -45,4 +48,7 @@ public interface AddressService {
     boolean deleteById(Long id);
 
     void save(AddressBo addressBo);
+
+    List<AddressBo> getListByUserId();
+
 }

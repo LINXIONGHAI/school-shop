@@ -71,5 +71,7 @@ public interface AddressDao {
     int deleteById(Long id);
 
     void updattByUserId(AddressDo addressDo);
+
+    List<AddressDo> query(AddressDo addressDo);
 }
 
