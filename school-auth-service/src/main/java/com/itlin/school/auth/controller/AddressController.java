@@ -3,6 +3,9 @@ package com.itlin.school.auth.controller;
 import com.itlin.common.emun.BizCodeEnum;
 import com.itlin.common.excepetion.BizException;
 import com.itlin.common.util.JsonData;
+import com.itlin.school.auth.bo.AddressBo;
+import com.itlin.school.auth.convert.AddressDtoConvert;
+import com.itlin.school.auth.dto.AddressReqDto;
 import com.itlin.school.auth.entity.AddressDo;
 import com.itlin.school.auth.service.AddressService;
 import com.itlin.school.auth.service.UserService;
@@ -10,10 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -36,6 +36,22 @@ public class AddressController {
             return JsonData.buildSuccess(addressDo);
         } catch (Exception e) {
             log.error("AddressController:get:erro={}",e.getMessage());
+            log.error(BizCodeEnum.SERVICE.getMessage());
+            throw new BizException(BizCodeEnum.SERVICE);
+        }
+    }
+
+
+    @PostMapping("save")
+    @ApiOperation("保存地址信息")
+    public JsonData save(@RequestBody AddressReqDto addressReqDto) {
+        log.info("AddressController:save={}", addressReqDto);
+        try {
+            AddressBo addressBo = AddressDtoConvert.INSERT.AddressToBoConvert(addressReqDto);
+            addressService.save(addressBo);
+            return JsonData.buildSuccess();
+        } catch (Exception e) {
+            log.error("AddressController:save:erro={}",e.getMessage());
             log.error(BizCodeEnum.SERVICE.getMessage());
             throw new BizException(BizCodeEnum.SERVICE);
         }

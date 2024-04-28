@@ -10,5 +10,4 @@ public interface UserDtoConvert {
     UserDtoConvert INSERT = Mappers.getMapper(UserDtoConvert.class);
     UserBo UserBoConvert(UserReqDto userReqDto);
 
-    UserReqDto UserDtooConvert(UserBo userBo);
 }

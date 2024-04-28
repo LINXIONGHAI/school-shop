@@ -6,7 +6,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-28T16:46:55+0800",
+    date = "2024-04-28T17:05:00+0800",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 1.8.0_131 (Oracle Corporation)"
 )
 public class UserDtoConvertImpl implements UserDtoConvert {
@@ -32,28 +32,5 @@ public class UserDtoConvertImpl implements UserDtoConvert {
         userBo.setEmailCode( userReqDto.getEmailCode() );
 
         return userBo;
-    }
-
-    @Override
-    public UserReqDto UserDtooConvert(UserBo userBo) {
-        if ( userBo == null ) {
-            return null;
-        }
-
-        UserReqDto userReqDto = new UserReqDto();
-
-        userReqDto.setId( userBo.getId() );
-        userReqDto.setName( userBo.getName() );
-        userReqDto.setPwd( userBo.getPwd() );
-        userReqDto.setHeadImg( userBo.getHeadImg() );
-        userReqDto.setSlogan( userBo.getSlogan() );
-        userReqDto.setSex( userBo.getSex() );
-        userReqDto.setPoints( userBo.getPoints() );
-        userReqDto.setCreateTime( userBo.getCreateTime() );
-        userReqDto.setMail( userBo.getMail() );
-        userReqDto.setSecret( userBo.getSecret() );
-        userReqDto.setEmailCode( userBo.getEmailCode() );
-
-        return userReqDto;
     }
 }

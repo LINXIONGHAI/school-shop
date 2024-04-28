@@ -167,6 +167,12 @@
         </set>
         where id = #{id}
     </update>
+    <update id="updattByUserId">
+        update address
+        set default_status=0
+        where user_id=#{userId};
+
+    </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">

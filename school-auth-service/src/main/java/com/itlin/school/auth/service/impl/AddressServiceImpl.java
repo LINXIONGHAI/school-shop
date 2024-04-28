@@ -1,11 +1,19 @@
 package com.itlin.school.auth.service.impl;
 
+import com.itlin.common.entity.LoginUser;
+import com.itlin.common.local.LoginThreadLocal;
+import com.itlin.school.auth.bo.AddressBo;
+import com.itlin.school.auth.convert.AddressDtoConvert;
+import com.itlin.school.auth.dao.UserDao;
 import com.itlin.school.auth.entity.AddressDo;
 import com.itlin.school.auth.dao.AddressDao;
+import com.itlin.school.auth.entity.UserDo;
 import com.itlin.school.auth.service.AddressService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Timer;
 
 /**
  * 电商-公司收发货地址表(Address)表服务实现类
@@ -18,6 +26,7 @@ public class AddressServiceImpl implements AddressService {
     @Resource
     private AddressDao addressDao;
 
+    LoginUser loginUser=null;
     /**
      * 通过ID查询单条数据
      *
@@ -63,5 +72,25 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public boolean deleteById(Long id) {
         return this.addressDao.deleteById(id) > 0;
+    }
+
+    @Transactional
+    @Override
+    public void save(AddressBo addressBo) {
+        LoginUser loginUser = LoginThreadLocal.get();
+        Integer defaultStatus = addressBo.getDefaultStatus();
+            //默认
+            addressBo.setUserId(Long.parseLong(String.valueOf(loginUser.getId())));
+            AddressDo addressDo = AddressDtoConvert.INSERT.AddressToBoConvert(addressBo);
+            if(addressBo.getDefaultStatus()==1){
+                addressDao.updattByUserId(addressDo);
+                addressDao.insert(addressDo);
+                return;
+            }
+            addressDao.insert(addressDo);
+
+
+
+
     }
 }

@@ -1,5 +1,6 @@
 package com.itlin.school.auth.dao;
 
+import com.itlin.school.auth.entity.AddressDo;
 import com.itlin.school.auth.entity.UserDo;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;

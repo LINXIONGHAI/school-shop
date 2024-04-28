@@ -1,5 +1,6 @@
 package com.itlin.school.auth.service;
 
+import com.itlin.school.auth.bo.AddressBo;
 import com.itlin.school.auth.entity.AddressDo;
 
 /**
@@ -43,4 +44,5 @@ public interface AddressService {
      */
     boolean deleteById(Long id);
 
+    void save(AddressBo addressBo);
 }
