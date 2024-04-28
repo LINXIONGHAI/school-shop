@@ -29,5 +29,11 @@
         </introspection-scope>
       </schema-mapping>
     </data-source>
+    <data-source name="school-product@117.72.67.117" uuid="00480080-56da-4031-9d64-9e02ab75b507">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-mapping />
+    </data-source>
   </component>
 </project>

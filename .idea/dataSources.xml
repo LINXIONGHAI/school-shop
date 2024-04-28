@@ -13,5 +13,11 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://117.72.67.117:3306/school-coupon</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="school-product@117.72.67.117" uuid="00480080-56da-4031-9d64-9e02ab75b507">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://117.72.67.117:3306/school-product</jdbc-url>
+    </data-source>
   </component>
 </project>

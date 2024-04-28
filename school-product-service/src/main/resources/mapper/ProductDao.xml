@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itlin.product.dao.ProductDao">
+
+    <resultMap type="com.itlin.product.entity.Product" id="ProductMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="coverImg" column="cover_img" jdbcType="VARCHAR"/>
+        <result property="detail" column="detail" jdbcType="VARCHAR"/>
+        <result property="oldPrice" column="old_price" jdbcType="NUMERIC"/>
+        <result property="price" column="price" jdbcType="NUMERIC"/>
+        <result property="stock" column="stock" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="lockStock" column="lock_stock" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ProductMap">
+        select
+          id, title, cover_img, detail, old_price, price, stock, create_time, lock_stock
+        from product
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ProductMap">
+        select
+          id, title, cover_img, detail, old_price, price, stock, create_time, lock_stock
+        from product
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="title != null and title != ''">
+                and title = #{title}
+            </if>
+            <if test="coverImg != null and coverImg != ''">
+                and cover_img = #{coverImg}
+            </if>
+            <if test="detail != null and detail != ''">
+                and detail = #{detail}
+            </if>
+            <if test="oldPrice != null">
+                and old_price = #{oldPrice}
+            </if>
+            <if test="price != null">
+                and price = #{price}
+            </if>
+            <if test="stock != null">
+                and stock = #{stock}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="lockStock != null">
+                and lock_stock = #{lockStock}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from product
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="title != null and title != ''">
+                and title = #{title}
+            </if>
+            <if test="coverImg != null and coverImg != ''">
+                and cover_img = #{coverImg}
+            </if>
+            <if test="detail != null and detail != ''">
+                and detail = #{detail}
+            </if>
+            <if test="oldPrice != null">
+                and old_price = #{oldPrice}
+            </if>
+            <if test="price != null">
+                and price = #{price}
+            </if>
+            <if test="stock != null">
+                and stock = #{stock}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="lockStock != null">
+                and lock_stock = #{lockStock}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into product(title, cover_img, detail, old_price, price, stock, create_time, lock_stock)
+        values (#{title}, #{coverImg}, #{detail}, #{oldPrice}, #{price}, #{stock}, #{createTime}, #{lockStock})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into product(title, cover_img, detail, old_price, price, stock, create_time, lock_stock)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.title}, #{entity.coverImg}, #{entity.detail}, #{entity.oldPrice}, #{entity.price}, #{entity.stock}, #{entity.createTime}, #{entity.lockStock})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into product(title, cover_img, detail, old_price, price, stock, create_time, lock_stock)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.title}, #{entity.coverImg}, #{entity.detail}, #{entity.oldPrice}, #{entity.price}, #{entity.stock}, #{entity.createTime}, #{entity.lockStock})
+        </foreach>
+        on duplicate key update
+        title = values(title),
+        cover_img = values(cover_img),
+        detail = values(detail),
+        old_price = values(old_price),
+        price = values(price),
+        stock = values(stock),
+        create_time = values(create_time),
+        lock_stock = values(lock_stock)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update product
+        <set>
+            <if test="title != null and title != ''">
+                title = #{title},
+            </if>
+            <if test="coverImg != null and coverImg != ''">
+                cover_img = #{coverImg},
+            </if>
+            <if test="detail != null and detail != ''">
+                detail = #{detail},
+            </if>
+            <if test="oldPrice != null">
+                old_price = #{oldPrice},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="stock != null">
+                stock = #{stock},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="lockStock != null">
+                lock_stock = #{lockStock},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from product where id = #{id}
+    </delete>
+
+</mapper>
+
