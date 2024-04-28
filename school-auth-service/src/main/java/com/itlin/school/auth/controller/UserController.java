@@ -5,11 +5,11 @@ import com.itlin.common.entity.LoginUser;
 import com.itlin.common.excepetion.BizException;
 import com.itlin.common.local.LoginThreadLocal;
 import com.itlin.common.util.JsonData;
-import com.itlin.redis.util.RedisUtil;
 import com.itlin.school.auth.bo.UserBo;
 import com.itlin.school.auth.convert.UserDtoConvert;
-import com.itlin.school.auth.dto.UserDto;
-import com.itlin.school.auth.entity.UserDo;
+import com.itlin.school.auth.convert.UserResDtoConvert;
+import com.itlin.school.auth.dto.UserReqDto;
+import com.itlin.school.auth.dto.UserResDto;
 import com.itlin.school.auth.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -37,8 +37,9 @@ public class UserController {
         LoginUser loginUser = LoginThreadLocal.get();
         log.info("UserController:get:user_id={}", loginUser);
         try {
-            UserDo userDo = userService.queryById(loginUser.getId());
-            return JsonData.buildSuccess(userDo);
+            UserBo userBo = userService.queryById(loginUser.getId());
+            UserResDto userResDto = UserResDtoConvert.INSERT.UserResDtooConvert(userBo);
+            return JsonData.buildSuccess(userResDto);
         } catch (Exception e) {
             log.error("UserController:get:erro={}", e.getMessage());
             log.error(BizCodeEnum.SERVICE.getMessage());
@@ -48,10 +49,10 @@ public class UserController {
 
     @PostMapping("register")
     @ApiOperation("用户注册")
-    public JsonData register(@Valid @RequestBody UserDto userDto, HttpServletRequest request) {
-        log.info("UserController:register:UserDto={}", userDto);
+    public JsonData register(@Valid @RequestBody UserReqDto userReqDto, HttpServletRequest request) {
+        log.info("UserController:register:UserDto={}", userReqDto);
         try {
-            UserBo userBo = UserDtoConvert.INSERT.UserBoConvert(userDto);
+            UserBo userBo = UserDtoConvert.INSERT.UserBoConvert(userReqDto);
             userService.register(request, userBo);
             return JsonData.buildSuccess();
         } catch (Exception e) {
@@ -65,10 +66,10 @@ public class UserController {
 
     @PostMapping("login")
     @ApiOperation("用户登录")
-    public JsonData login(@Valid @RequestBody UserDto userDto) {
-        log.info("UserController:login:UserDto={}", userDto);
+    public JsonData login(@Valid @RequestBody UserReqDto userReqDto) {
+        log.info("UserController:login:UserDto={}", userReqDto);
         try {
-            UserBo userBo = UserDtoConvert.INSERT.UserBoConvert(userDto);
+            UserBo userBo = UserDtoConvert.INSERT.UserBoConvert(userReqDto);
             String token=userService.login( userBo);
             return JsonData.buildSuccess(token);
         } catch (Exception e) {

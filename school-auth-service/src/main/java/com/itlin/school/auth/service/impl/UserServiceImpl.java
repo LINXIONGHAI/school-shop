@@ -13,16 +13,12 @@ import com.itlin.school.auth.convert.UserBoConvert;
 import com.itlin.school.auth.entity.UserDo;
 import com.itlin.school.auth.dao.UserDao;
 import com.itlin.school.auth.service.UserService;
-import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.Md5Crypt;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -50,8 +46,10 @@ public class UserServiceImpl implements UserService {
      * @return 实例对象
      */
     @Override
-    public UserDo queryById(Object id) {
-        return this.userDao.queryById(id);
+    public UserBo queryById(Object id) {
+        UserDo userDo = this.userDao.queryById(id);
+        UserBo userBo = UserBoConvert.INSERT.UserBoConvert(userDo);
+        return userBo;
     }
 
 
@@ -76,7 +74,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDo update(UserDo userDo) {
         this.userDao.update(userDo);
-        return this.queryById(userDo.getId());
+        UserBo userBo = this.queryById(userDo.getId());
+        UserDo userDo1 = UserBoConvert.INSERT.UserDoConvert(userBo);
+        return userDo1;
     }
 
     /**

@@ -20,7 +20,7 @@ public interface UserService {
      * @param id 主键
      * @return 实例对象
      */
-    UserDo queryById(Object id);
+    UserBo queryById(Object id);
 
 
     /**
