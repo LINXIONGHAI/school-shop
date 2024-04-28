@@ -2,6 +2,7 @@ package com.itlin.school.auth.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -23,6 +24,7 @@ public class UserDto implements Serializable {
     /**
      * 密码
      */
+    @NotNull(message = "密码不能为空")
     private String pwd;
     /**
      * 头像
@@ -45,6 +47,7 @@ public class UserDto implements Serializable {
     /**
      * 邮箱
      */
+    @NotNull(message = "邮箱不能为空")
     private String mail;
     /**
      * 盐，用于个人敏感信息处理
@@ -55,6 +58,7 @@ public class UserDto implements Serializable {
     /**
      * 邮箱验证码
      */
+    @NotNull(message = "验证码不能为空")
     private String emailCode;
 
 

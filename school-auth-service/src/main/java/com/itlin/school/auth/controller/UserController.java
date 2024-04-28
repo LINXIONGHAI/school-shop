@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/user/v1")
@@ -44,7 +45,7 @@ public class UserController {
 
     @PostMapping("register")
     @ApiOperation("用户注册")
-    public JsonData register(@RequestBody UserDto userDto, HttpServletRequest request) {
+    public JsonData register(@Valid @RequestBody UserDto userDto, HttpServletRequest request) {
         log.info("UserController:register:UserDto={}", userDto);
         try {
             UserBo userBo = UserDtoConvert.INSERT.UserBoConvert(userDto);
@@ -53,9 +54,10 @@ public class UserController {
             return JsonData.buildSuccess();
         } catch (Exception e) {
             e.printStackTrace();
+            BizException bizException= (BizException) e;
             log.error("UserController:register:erro={}", e.getMessage());
             log.error(BizCodeEnum.SERVICE.getMessage());
-            throw new BizException(BizCodeEnum.SERVICE);
+            throw  bizException;
         }
     }
 
