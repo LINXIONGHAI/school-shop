@@ -32,4 +32,10 @@ public class LoginIntercept implements HandlerInterceptor {
         LoginThreadLocal.set(loginUser);
         return true;
     }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        System.out.println("logloglogloglogloglogloglog");
+        LoginThreadLocal.remove();
+    }
 }
