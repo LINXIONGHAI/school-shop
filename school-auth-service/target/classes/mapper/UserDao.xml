@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itlin.school.auth.dao.UserDao">
+
+    <resultMap type="com.itlin.school.auth.entity.UserDo" id="UserMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="pwd" column="pwd" jdbcType="VARCHAR"/>
+        <result property="headImg" column="head_img" jdbcType="VARCHAR"/>
+        <result property="slogan" column="slogan" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="INTEGER"/>
+        <result property="points" column="points" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="mail" column="mail" jdbcType="VARCHAR"/>
+        <result property="secret" column="secret" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UserMap">
+        select
+          id, name, pwd, head_img, slogan, sex, points, create_time, mail, secret
+        from `user`
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UserMap">
+        select
+          id, name, pwd, head_img, slogan, sex, points, create_time, mail, secret
+        from `user`
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="pwd != null and pwd != ''">
+                and pwd = #{pwd}
+            </if>
+            <if test="headImg != null and headImg != ''">
+                and head_img = #{headImg}
+            </if>
+            <if test="slogan != null and slogan != ''">
+                and slogan = #{slogan}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex}
+            </if>
+            <if test="points != null">
+                and points = #{points}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="mail != null and mail != ''">
+                and mail = #{mail}
+            </if>
+            <if test="secret != null and secret != ''">
+                and secret = #{secret}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from `user`
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="pwd != null and pwd != ''">
+                and pwd = #{pwd}
+            </if>
+            <if test="headImg != null and headImg != ''">
+                and head_img = #{headImg}
+            </if>
+            <if test="slogan != null and slogan != ''">
+                and slogan = #{slogan}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex}
+            </if>
+            <if test="points != null">
+                and points = #{points}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="mail != null and mail != ''">
+                and mail = #{mail}
+            </if>
+            <if test="secret != null and secret != ''">
+                and secret = #{secret}
+            </if>
+        </where>
+    </select>
+    <select id="query" resultType="com.itlin.school.auth.entity.UserDo">
+
+        select  * from `user`
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="pwd != null and pwd != ''">
+                and pwd = #{pwd}
+            </if>
+            <if test="headImg != null and headImg != ''">
+                and head_img = #{headImg}
+            </if>
+            <if test="slogan != null and slogan != ''">
+                and slogan = #{slogan}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex}
+            </if>
+            <if test="points != null">
+                and points = #{points}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="mail != null and mail != ''">
+                and mail = #{mail}
+            </if>
+            <if test="secret != null and secret != ''">
+                and secret = #{secret}
+            </if>
+        </where>
+
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into `user`(name, pwd, head_img, slogan, sex, points, create_time, mail, secret)
+        values (#{name}, #{pwd}, #{headImg}, #{slogan}, #{sex}, #{points}, #{createTime}, #{mail}, #{secret})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into `user`(name, pwd, head_img, slogan, sex, points, create_time, mail, secret)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.name}, #{entity.pwd}, #{entity.headImg}, #{entity.slogan}, #{entity.sex}, #{entity.points}, #{entity.createTime}, #{entity.mail}, #{entity.secret})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into `user`(name, pwd, head_img, slogan, sex, points, create_time, mail, secret)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.name}, #{entity.pwd}, #{entity.headImg}, #{entity.slogan}, #{entity.sex}, #{entity.points}, #{entity.createTime}, #{entity.mail}, #{entity.secret})
+        </foreach>
+        on duplicate key update
+        name = values(name),
+        pwd = values(pwd),
+        head_img = values(head_img),
+        slogan = values(slogan),
+        sex = values(sex),
+        points = values(points),
+        create_time = values(create_time),
+        mail = values(mail),
+        secret = values(secret)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update `user`
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="pwd != null and pwd != ''">
+                pwd = #{pwd},
+            </if>
+            <if test="headImg != null and headImg != ''">
+                head_img = #{headImg},
+            </if>
+            <if test="slogan != null and slogan != ''">
+                slogan = #{slogan},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="points != null">
+                points = #{points},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="mail != null and mail != ''">
+                mail = #{mail},
+            </if>
+            <if test="secret != null and secret != ''">
+                secret = #{secret},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from `user` where id = #{id}
+    </delete>
+
+</mapper>
+
