@@ -104,4 +104,13 @@ public class RedisUtil {
     }
 
 
+    /**
+     * 延续key
+     * @param key
+     * @param l
+     * @param days
+     */
+    public void expire(String key, long l, TimeUnit days) {
+        redisTemplate.expire(key,l,days);
+    }
 }

@@ -3,7 +3,9 @@ package com.itlin.school.auth.service.impl;
 import com.itlin.common.emun.BizCodeEnum;
 import com.itlin.common.entity.LoginUser;
 import com.itlin.common.excepetion.BizException;
+import com.itlin.common.local.LoginThreadLocal;
 import com.itlin.common.util.CommonUtil;
+import com.itlin.common.util.JsonData;
 import com.itlin.redis.util.RedisUtil;
 import com.itlin.school.auth.bo.UserBo;
 import com.itlin.school.auth.convert.LoginUserConvert;
@@ -11,9 +13,11 @@ import com.itlin.school.auth.convert.UserBoConvert;
 import com.itlin.school.auth.entity.UserDo;
 import com.itlin.school.auth.dao.UserDao;
 import com.itlin.school.auth.service.UserService;
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.Md5Crypt;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -117,15 +121,14 @@ public class UserServiceImpl implements UserService {
      * 根据用户信息查询
      */
 
-    public UserDo query(UserDo userDo){
-       return userDao.query(userDo);
+    public UserDo query(UserDo userDo) {
+        return userDao.query(userDo);
     }
-
-
 
 
     /**
      * 用户登录
+     *
      * @param userBo
      * @return
      */
@@ -134,26 +137,40 @@ public class UserServiceImpl implements UserService {
         UserDo userDo = UserBoConvert.INSERT.UserDoConvert(userBo);
         userDo.setPwd(null);
         UserDo queryDo = this.query(userDo);
-        if(queryDo==null){
+        if (queryDo == null) {
             throw new BizException(BizCodeEnum.ACCOUNT_PWD_ERROR);
         }
         String pwd = queryDo.getPwd();
         String secret = queryDo.getSecret();
         String md5Crypt = Md5Crypt.md5Crypt(userBo.getPwd().getBytes(), secret);
-        if(md5Crypt.equals(pwd)){
+        if (md5Crypt.equals(pwd)) {
             //todo 颁发token
             LoginUser loginUser = LoginUserConvert.INSERT.UserLoginConvert(queryDo);
             String token = CommonUtil.geneJsonWebToken(loginUser);
             //redis存token
             String key = redisUtil.buildKey("user-auth", "token", token);
-            redisUtil.setNx(key,token,30L, TimeUnit.DAYS);
+            redisUtil.setNx(key, token, 1L, TimeUnit.DAYS);
             return token;
         }
         throw new BizException(BizCodeEnum.ACCOUNT_PWD_ERROR);
     }
 
-
-
+    @Override
+    public JsonData expire(HttpServletRequest request) {
+        String token = request.getHeader("itlin.token");
+        if(token==null){
+            throw  new BizException(BizCodeEnum.ACCOUNT_EXPIRE);
+        }
+        String key = redisUtil.buildKey("user-auth", "token", token);
+        String redisToken = redisUtil.get(key);
+        if(redisToken==null){
+            String reftoken = CommonUtil.geneJsonWebToken(LoginThreadLocal.get());
+            return JsonData.buildSuccess(reftoken);
+//            throw new BizException(BizCodeEnum.ACCOUNT_EXPIRE);
+        }
+        redisUtil.expire(key,1L,TimeUnit.DAYS);
+        return JsonData.buildSuccess();
+    }
 
 
     /**

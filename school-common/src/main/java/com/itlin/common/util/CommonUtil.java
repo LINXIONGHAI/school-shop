@@ -110,8 +110,8 @@ public class CommonUtil {
                 .claim("name", user.getName())
                 .claim("mail", user.getMail())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000*60*60*24*30))
-                .signWith(SignatureAlgorithm.HS256, "itlin.top").compact();
+                .setExpiration(new Date(System.currentTimeMillis() + 1000*60*60*24*7))
+                .signWith(SignatureAlgorithm.HS256, "itlin").compact();
 
         token =  "sdvsdsdvdfasdwedwescfdfdrg" + token;
 
@@ -127,7 +127,7 @@ public class CommonUtil {
 
         try {
 
-            final Claims claims = Jwts.parser().setSigningKey("itlin.top")
+            final Claims claims = Jwts.parser().setSigningKey("itlin")
                     .parseClaimsJws(token.replace("sdvsdsdvdfasdwedwescfdfdrg", "")).getBody();
 
             return claims;

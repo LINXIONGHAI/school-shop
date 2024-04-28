@@ -32,6 +32,7 @@ public enum BizCodeEnum {
 
     ACCOUNT_UNREGISTER(250002, "账号不存在"),
     ACCOUNT_PWD_ERROR(250003, "账号或者密码错误"),
+    ACCOUNT_EXPIRE(250004,"用户已经过期，重新登录"),
     /**
      * 服务异常
      */

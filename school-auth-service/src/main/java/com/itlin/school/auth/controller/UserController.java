@@ -77,5 +77,14 @@ public class UserController {
         }
     }
 
+    //    redis时间延续
+    @GetMapping("expire")
+    @ApiOperation("token重置续期")
+    public JsonData expire(HttpServletRequest request) {
+       return userService.expire(request);
+
+
+    }
+
 
 }

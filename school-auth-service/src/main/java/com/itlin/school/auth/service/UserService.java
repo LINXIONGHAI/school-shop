@@ -1,5 +1,6 @@
 package com.itlin.school.auth.service;
 
+import com.itlin.common.util.JsonData;
 import com.itlin.school.auth.bo.UserBo;
 import com.itlin.school.auth.entity.UserDo;
 
@@ -58,4 +59,6 @@ public interface UserService {
      * @return
      */
     String login(UserBo userBo);
+
+    JsonData expire(HttpServletRequest request);
 }
