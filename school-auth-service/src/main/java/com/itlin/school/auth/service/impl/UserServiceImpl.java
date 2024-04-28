@@ -1,12 +1,18 @@
 package com.itlin.school.auth.service.impl;
 
+import com.itlin.common.emun.BizCodeEnum;
+import com.itlin.common.excepetion.BizException;
+import com.itlin.common.util.CommonUtil;
 import com.itlin.redis.util.RedisUtil;
+import com.itlin.school.auth.bo.UserBo;
+import com.itlin.school.auth.convert.UserBoConvert;
 import com.itlin.school.auth.entity.UserDo;
 import com.itlin.school.auth.dao.UserDao;
 import com.itlin.school.auth.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * (User)表服务实现类
@@ -18,6 +24,9 @@ import javax.annotation.Resource;
 public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
+
+    @Resource
+    private RedisUtil redisUtil;
 
 
     /**
@@ -65,5 +74,41 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteById(Object id) {
         return this.userDao.deleteById(id) > 0;
+    }
+
+
+    /**
+     * 用户注册
+     *
+     * @param userBo
+     */
+    @Override
+    public void register(HttpServletRequest request, UserBo userBo) {
+        String mail = userBo.getMail();
+        String emailCode = userBo.getEmailCode();
+        String emailKey = getEmailKey(request, mail);
+        String redisVal = redisUtil.get(emailKey);
+        if (redisVal == null) {
+            throw new BizException(BizCodeEnum.CODE_ERROR);
+        }
+        if (emailCode.equals(redisVal)) {
+            redisUtil.del(emailKey);
+            UserDo userDo = UserBoConvert.INSERT.UserDoConvert(userBo);
+
+            String pwd = userDo.getPwd();
+            //TODO 需要对密码进行加密处理
+            userDao.insert(userDo);
+            return;
+        }
+        throw new BizException(BizCodeEnum.CODE_ERROR);
+
+    }
+
+    /**
+     * 获取邮箱key
+     */
+    public String getEmailKey(HttpServletRequest request, String email) {
+        String ipAddr = CommonUtil.getIpAddr(request);
+        return redisUtil.buildKey("user-auth", "email", ipAddr, email);
     }
 }

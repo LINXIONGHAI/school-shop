@@ -1,6 +1,9 @@
 package com.itlin.school.auth.service;
 
+import com.itlin.school.auth.bo.UserBo;
 import com.itlin.school.auth.entity.UserDo;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * (User)表服务接口
@@ -43,4 +46,9 @@ public interface UserService {
      */
     boolean deleteById(Object id);
 
+    /**
+     * 用户注册
+     * @param userBo
+     */
+    void register(HttpServletRequest request, UserBo userBo);
 }
