@@ -21,6 +21,7 @@
           id, user_id, default_status, receive_name, phone, province, city, region, detail_address, create_time
         from address
         where id = #{id}
+        and user_id = #{userId}
     </select>
 
     <!--查询指定行数据-->

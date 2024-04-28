@@ -40,7 +40,8 @@ public class AddressServiceImpl implements AddressService {
      */
     @Override
     public AddressDo queryById(Long id) {
-        return this.addressDao.queryById(id);
+        LoginUser loginUser = LoginThreadLocal.get();
+        return this.addressDao.queryById(id,Long.parseLong(String.valueOf(loginUser.getId())));
     }
 
 

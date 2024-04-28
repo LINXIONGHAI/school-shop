@@ -1,16 +1,16 @@
-package com.itlin.school.auth.dao;
+package com.itlin.coupon.dao;
 
-import com.itlin.school.auth.entity.AddressDo;
+import com.itlin.coupon.entity.Coupon;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * 电商-公司收发货地址表(Address)表数据库访问层
+ * (Coupon)表数据库访问层
  *
  * @author makejava
- * @since 2024-04-27 21:56:25
+ * @since 2024-04-28 20:25:04
  */
-public interface AddressDao {
+public interface CouponDao {
 
     /**
      * 通过ID查询单条数据
@@ -18,49 +18,49 @@ public interface AddressDao {
      * @param id 主键
      * @return 实例对象
      */
-    AddressDo queryById(@Param("id") Long id,@Param("userId") Long userId);
+    Coupon queryById(Long id);
 
 
     /**
      * 统计总行数
      *
-     * @param address 查询条件
+     * @param coupon 查询条件
      * @return 总行数
      */
-    long count(AddressDo address);
+    long count(Coupon coupon);
 
     /**
      * 新增数据
      *
-     * @param address 实例对象
+     * @param coupon 实例对象
      * @return 影响行数
      */
-    int insert(AddressDo address);
+    int insert(Coupon coupon);
 
     /**
      * 批量新增数据（MyBatis原生foreach方法）
      *
-     * @param entities List<Address> 实例对象列表
+     * @param entities List<Coupon> 实例对象列表
      * @return 影响行数
      */
-    int insertBatch(@Param("entities") List<AddressDo> entities);
+    int insertBatch(@Param("entities") List<Coupon> entities);
 
     /**
      * 批量新增或按主键更新数据（MyBatis原生foreach方法）
      *
-     * @param entities List<Address> 实例对象列表
+     * @param entities List<Coupon> 实例对象列表
      * @return 影响行数
      * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
      */
-    int insertOrUpdateBatch(@Param("entities") List<AddressDo> entities);
+    int insertOrUpdateBatch(@Param("entities") List<Coupon> entities);
 
     /**
      * 修改数据
      *
-     * @param address 实例对象
+     * @param coupon 实例对象
      * @return 影响行数
      */
-    int update(AddressDo address);
+    int update(Coupon coupon);
 
     /**
      * 通过主键删除数据
@@ -70,10 +70,8 @@ public interface AddressDao {
      */
     int deleteById(Long id);
 
-    void updattByUserId(AddressDo addressDo);
+    List<Coupon> page(Coupon coupon);
 
-    List<AddressDo> query(AddressDo addressDo);
-
-    Integer deleteByIdAndUserId(AddressDo addressDo);
+    Coupon query(Coupon coupon);
 }
 

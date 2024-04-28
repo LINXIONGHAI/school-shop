@@ -1,4 +1,4 @@
-package com.itlin.school.auth.handel;
+package com.itlin.common.handel;
 
 import com.itlin.common.emun.BizCodeEnum;
 import com.itlin.common.entity.LoginUser;
