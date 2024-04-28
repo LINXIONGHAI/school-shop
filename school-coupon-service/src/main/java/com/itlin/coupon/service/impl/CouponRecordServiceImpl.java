@@ -98,7 +98,6 @@ public class CouponRecordServiceImpl implements CouponRecordService {
             if(coupon==null ){
                 throw new BizException(BizCodeEnum.COUPON_NO_PUBLISH);
             }
-
             if(coupon.getPublishCount()<=0){
                 throw new BizException(BizCodeEnum.COUPON_NO_NULL);
             }
