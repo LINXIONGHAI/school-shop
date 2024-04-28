@@ -1,10 +1,12 @@
 package com.itlin.school.auth.service.impl;
 
 import com.itlin.common.emun.BizCodeEnum;
+import com.itlin.common.entity.LoginUser;
 import com.itlin.common.excepetion.BizException;
 import com.itlin.common.util.CommonUtil;
 import com.itlin.redis.util.RedisUtil;
 import com.itlin.school.auth.bo.UserBo;
+import com.itlin.school.auth.convert.LoginUserConvert;
 import com.itlin.school.auth.convert.UserBoConvert;
 import com.itlin.school.auth.entity.UserDo;
 import com.itlin.school.auth.dao.UserDao;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.concurrent.TimeUnit;
 
 /**
  * (User)表服务实现类
@@ -109,6 +112,49 @@ public class UserServiceImpl implements UserService {
         throw new BizException(BizCodeEnum.CODE_ERROR);
 
     }
+
+    /**
+     * 根据用户信息查询
+     */
+
+    public UserDo query(UserDo userDo){
+       return userDao.query(userDo);
+    }
+
+
+
+
+    /**
+     * 用户登录
+     * @param userBo
+     * @return
+     */
+    @Override
+    public String login(UserBo userBo) {
+        UserDo userDo = UserBoConvert.INSERT.UserDoConvert(userBo);
+        userDo.setPwd(null);
+        UserDo queryDo = this.query(userDo);
+        if(queryDo==null){
+            throw new BizException(BizCodeEnum.ACCOUNT_PWD_ERROR);
+        }
+        String pwd = queryDo.getPwd();
+        String secret = queryDo.getSecret();
+        String md5Crypt = Md5Crypt.md5Crypt(userBo.getPwd().getBytes(), secret);
+        if(md5Crypt.equals(pwd)){
+            //todo 颁发token
+            LoginUser loginUser = LoginUserConvert.INSERT.UserLoginConvert(queryDo);
+            String token = CommonUtil.geneJsonWebToken(loginUser);
+            //redis存token
+            String key = redisUtil.buildKey("user-auth", "token", token);
+            redisUtil.setNx(key,token,30L, TimeUnit.DAYS);
+            return token;
+        }
+        throw new BizException(BizCodeEnum.ACCOUNT_PWD_ERROR);
+    }
+
+
+
+
 
     /**
      * 获取邮箱key

@@ -70,5 +70,6 @@ public interface UserDao {
      */
     int deleteById(Object id);
 
+    UserDo query(UserDo userDo);
 }
 

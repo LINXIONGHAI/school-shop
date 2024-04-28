@@ -1,4 +1,4 @@
-package com.itlin.school.auth.dto;
+package com.itlin.common.entity;
 
 import lombok.Data;
 
@@ -13,7 +13,7 @@ import java.util.Date;
  * @since 2024-04-27 21:56:29
  */
 @Data
-public class UserDto implements Serializable {
+public class LoginUser implements Serializable {
     private static final long serialVersionUID = -54421200782846399L;
 
     private Object id;
@@ -58,7 +58,7 @@ public class UserDto implements Serializable {
     /**
      * 邮箱验证码
      */
-//    @NotNull(message = "验证码不能为空")
+    @NotNull(message = "验证码不能为空")
     private String emailCode;
 
 

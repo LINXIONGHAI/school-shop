@@ -1,10 +1,18 @@
 package com.itlin.common.util;
 
+import com.itlin.common.entity.LoginUser;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
+import java.util.Date;
 import java.util.Random;
+
+import static sun.security.x509.X509CertInfo.SUBJECT;
 
 public class CommonUtil {
 
@@ -87,5 +95,47 @@ public class CommonUtil {
         return saltString.toString();
     }
 
+    /**
+     * 根据用户信息，生成令牌
+     *
+     * @param user
+     * @return
+     */
+    public static String geneJsonWebToken(LoginUser user) {
+
+        Long userId = Long.parseLong(String.valueOf(user.getId())) ;
+        String token = Jwts.builder().setSubject(SUBJECT)
+                .claim("head_img", user.getHeadImg())
+                .claim("id", userId)
+                .claim("name", user.getName())
+                .claim("mail", user.getMail())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 1000*60*60*24*30))
+                .signWith(SignatureAlgorithm.HS256, "itlin.top").compact();
+
+        token =  "sdvsdsdvdfasdwedwescfdfdrg" + token;
+
+        return token;
+    }
+    /**
+     * 校验token的方法
+     *
+     * @param token
+     * @return
+     */
+    public static Claims checkJWT(String token) {
+
+        try {
+
+            final Claims claims = Jwts.parser().setSigningKey("itlin.top")
+                    .parseClaimsJws(token.replace("sdvsdsdvdfasdwedwescfdfdrg", "")).getBody();
+
+            return claims;
+
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
 
 }

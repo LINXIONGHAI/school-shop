@@ -51,4 +51,11 @@ public interface UserService {
      * @param userBo
      */
     void register(HttpServletRequest request, UserBo userBo);
+
+    /**
+     * 用户登录
+     * @param userBo
+     * @return
+     */
+    String login(UserBo userBo);
 }

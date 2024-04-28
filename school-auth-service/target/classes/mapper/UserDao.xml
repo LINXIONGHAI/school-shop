@@ -100,6 +100,44 @@
             </if>
         </where>
     </select>
+    <select id="query" resultType="com.itlin.school.auth.entity.UserDo">
+
+        select  * from `user`
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="pwd != null and pwd != ''">
+                and pwd = #{pwd}
+            </if>
+            <if test="headImg != null and headImg != ''">
+                and head_img = #{headImg}
+            </if>
+            <if test="slogan != null and slogan != ''">
+                and slogan = #{slogan}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex}
+            </if>
+            <if test="points != null">
+                and points = #{points}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="mail != null and mail != ''">
+                and mail = #{mail}
+            </if>
+            <if test="secret != null and secret != ''">
+                and secret = #{secret}
+            </if>
+        </where>
+
+
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

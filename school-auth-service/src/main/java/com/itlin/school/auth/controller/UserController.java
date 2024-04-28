@@ -60,5 +60,22 @@ public class UserController {
         }
     }
 
+    @PostMapping("login")
+    @ApiOperation("用户登录")
+    public JsonData login(@Valid @RequestBody UserDto userDto) {
+        log.info("UserController:login:UserDto={}", userDto);
+        try {
+            UserBo userBo = UserDtoConvert.INSERT.UserBoConvert(userDto);
+            String token=userService.login( userBo);
+            return JsonData.buildSuccess(token);
+        } catch (Exception e) {
+            e.printStackTrace();
+            BizException bizException= (BizException) e;
+            log.error("UserController:login:erro={}", e.getMessage());
+            log.error(BizCodeEnum.SERVICE.getMessage());
+            throw  bizException;
+        }
+    }
+
 
 }
