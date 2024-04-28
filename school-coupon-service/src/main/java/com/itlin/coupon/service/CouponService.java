@@ -48,4 +48,8 @@ public interface CouponService {
     boolean deleteById(Long id);
 
     List<CouponBo> page(CouponBo converttoboo);
+
+    Coupon query(Coupon coupon);
+
+    void incroneByCountStack(Long id);
 }

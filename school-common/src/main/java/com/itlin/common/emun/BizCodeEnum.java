@@ -43,6 +43,12 @@ public enum BizCodeEnum {
 
     ADDRESS_INSERT_ERROR(2400009,"删除地址失败"),
     ADDRESS_ERRO(2400010,"默认地址不能删除"),
+
+
+    COUPON_NO_PUBLISH(1562,"优惠卷未发布"),
+    COUNP_RECORD_ERROR(1563,"领取上限"),
+    COUPON_NO_NULL(1564,"优惠卷已被抢光"),
+    COUPON_NO_DATE(1565,"优惠卷已过期"),
     ;
 
     private BizCodeEnum(Integer code, String message) {

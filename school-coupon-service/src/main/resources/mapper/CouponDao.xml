@@ -290,6 +290,10 @@
         </set>
         where id = #{id}
     </update>
+    <update id="incroneByCountStack">
+        update coupon set stock=stock-1
+        where id=#{id} and stock>0
+    </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">

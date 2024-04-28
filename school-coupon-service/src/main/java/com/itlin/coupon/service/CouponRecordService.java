@@ -43,4 +43,5 @@ public interface CouponRecordService {
      */
     boolean deleteById(Object id);
 
+    void save(String couponId);
 }

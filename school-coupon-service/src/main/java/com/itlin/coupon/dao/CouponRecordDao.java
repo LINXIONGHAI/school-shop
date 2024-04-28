@@ -70,5 +70,6 @@ public interface CouponRecordDao {
      */
     int deleteById(Object id);
 
+    Integer query(CouponRecord couponRecord1);
 }
 

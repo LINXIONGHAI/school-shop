@@ -2,6 +2,7 @@ package com.itlin.coupon.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.itlin.common.emun.CouponPublishEnum;
 import com.itlin.coupon.convert.CouponBoConvert;
 import com.itlin.coupon.dto.CouponBo;
 import com.itlin.coupon.dto.CouponDto;
@@ -74,6 +75,7 @@ public class CouponServiceImpl implements CouponService {
 
     @Override
     public List<CouponBo> page(CouponBo couponBo) {
+        couponBo.setPublish(CouponPublishEnum.PUBLISH.name());
 
         Coupon coupon = CouponBoConvert.INSERT.CONVERTTODO(couponBo);
         PageHelper.startPage(couponBo.getPage(),couponBo.getPageSize());
@@ -92,5 +94,15 @@ public class CouponServiceImpl implements CouponService {
 
 
 
+    }
+
+    @Override
+    public Coupon query(Coupon coupon) {
+        return couponDao.query(coupon);
+    }
+
+    @Override
+    public void incroneByCountStack(Long id) {
+        couponDao.incroneByCountStack(id);
     }
 }
