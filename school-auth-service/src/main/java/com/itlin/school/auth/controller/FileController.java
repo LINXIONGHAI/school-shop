@@ -1,7 +1,10 @@
 package com.itlin.school.auth.controller;
 
+import com.itlin.common.emun.BizCodeEnum;
+import com.itlin.common.excepetion.BizException;
 import com.itlin.common.util.JsonData;
 import com.itlin.school.auth.service.AliyunService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +15,7 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/api/file/v1")
+@Slf4j
 public class FileController {
 
     @Resource
@@ -19,7 +23,15 @@ public class FileController {
 
     @PostMapping("/uploud")
     public JsonData uploud(@RequestParam("file") MultipartFile file){
-       return aliyunService.uploudFile(file);
+        try {
+            return aliyunService.uploudFile(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+            BizException bizException= (BizException) e;
+            log.error("UserController:register:erro={}", e.getMessage());
+            log.error(BizCodeEnum.SERVICE.getMessage());
+            throw  bizException;
+        }
 
     }
 
