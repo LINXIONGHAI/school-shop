@@ -21,6 +21,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -149,7 +153,7 @@ public class UserServiceImpl implements UserService {
             String token = CommonUtil.geneJsonWebToken(loginUser);
             //redis存token
             String key = redisUtil.buildKey("user-auth", "token", token);
-            redisUtil.setNx(key, token, 1L, TimeUnit.DAYS);
+            redisUtil.setNx(key, token, 10L, TimeUnit.DAYS);
             return token;
         }
         throw new BizException(BizCodeEnum.ACCOUNT_PWD_ERROR);
@@ -158,18 +162,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public JsonData expire(HttpServletRequest request) {
         String token = request.getHeader("itlin.token");
-        if(token==null){
-            throw  new BizException(BizCodeEnum.ACCOUNT_EXPIRE);
+        if (token == null) {
+            throw new BizException(BizCodeEnum.ACCOUNT_EXPIRE);
         }
         String key = redisUtil.buildKey("user-auth", "token", token);
         String redisToken = redisUtil.get(key);
-        if(redisToken==null){
+        Map<String, Object> map = new HashMap<>();
+        if (redisToken == null) {
             String reftoken = CommonUtil.geneJsonWebToken(LoginThreadLocal.get());
-            return JsonData.buildSuccess(reftoken);
-//            throw new BizException(BizCodeEnum.ACCOUNT_EXPIRE);
+            String refKey = redisUtil.buildKey("user-auth", "token", reftoken);
+            redisUtil.setNx(refKey, reftoken, 10L, TimeUnit.DAYS);
+            map.put("expearTime", System.currentTimeMillis() + 1000 * 60 * 60 * 5);
+            map.put("redisTime", System.currentTimeMillis() + 1000 * 60 * 60 * 10);
+            map.put("authtoken", reftoken);
+            return JsonData.buildSuccess(map);
         }
-        redisUtil.expire(key,1L,TimeUnit.DAYS);
-        return JsonData.buildSuccess();
+        redisUtil.del(key);
+        String reftoken = CommonUtil.geneJsonWebToken(LoginThreadLocal.get());
+        String refKey = redisUtil.buildKey("user-auth", "token", reftoken);
+        redisUtil.setNx(refKey, reftoken, 10L, TimeUnit.DAYS);
+        map.put("expearTime", System.currentTimeMillis() + 1000 * 60 * 60 * 5);
+        map.put("redisTime", System.currentTimeMillis() + 1000 * 60 * 60 * 10);
+        map.put("authtoken", reftoken);
+        return JsonData.buildSuccess(map);
     }
 
 

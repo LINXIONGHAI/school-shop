@@ -110,7 +110,7 @@ public class CommonUtil {
                 .claim("name", user.getName())
                 .claim("mail", user.getMail())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000*60*60*24*7))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000*60*60*24*5))
                 .signWith(SignatureAlgorithm.HS256, "itlin").compact();
 
         token =  "sdvsdsdvdfasdwedwescfdfdrg" + token;
