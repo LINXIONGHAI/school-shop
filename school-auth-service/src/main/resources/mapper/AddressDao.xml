@@ -218,6 +218,10 @@
     <delete id="deleteById">
         delete from address where id = #{id}
     </delete>
+    <delete id="deleteByIdAndUserId">
+         delete from address where id = #{id} and user_id=#{userId}
+
+    </delete>
 
 </mapper>
 

@@ -51,4 +51,6 @@ public interface AddressService {
 
     List<AddressBo> getListByUserId();
 
+    void delete(Long address_id);
+
 }

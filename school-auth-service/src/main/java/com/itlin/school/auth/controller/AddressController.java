@@ -44,6 +44,20 @@ public class AddressController {
         }
     }
 
+    @GetMapping("delete/{address_id}")
+    @ApiOperation("删除用户地址信息")
+    public JsonData delete( @PathVariable Long address_id) {
+        log.info("AddressController:delete:addressId={}", address_id);
+        try {
+            addressService.delete(address_id);
+            return JsonData.buildSuccess();
+        } catch (Exception e) {
+            log.error("AddressController:delete:erro={}",e.getMessage());
+            BizException bizException= (BizException) e;
+            throw bizException;
+        }
+    }
+
 
     @GetMapping("getByUserId")
     @ApiOperation("根据用户id查询地址信息")

@@ -59,8 +59,8 @@ public class NotifController {
 
         } catch (Exception e) {
             log.error("NotifController:getCapter={}", e.getMessage());
-            log.error(BizCodeEnum.SERVICE.getMessage());
-            throw new BizException(BizCodeEnum.SERVICE);
+            BizException bizException= (BizException) e;
+            throw bizException;
         }
     }
 

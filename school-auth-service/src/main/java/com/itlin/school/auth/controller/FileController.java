@@ -27,9 +27,7 @@ public class FileController {
             return aliyunService.uploudFile(file);
         } catch (Exception e) {
             e.printStackTrace();
-            BizException bizException = (BizException) e;
-            log.error("UserController:register:erro={}", e.getMessage());
-            log.error(BizCodeEnum.SERVICE.getMessage());
+            BizException bizException= (BizException) e;
             throw bizException;
         }
 

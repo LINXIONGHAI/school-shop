@@ -1,6 +1,8 @@
 package com.itlin.school.auth.service.impl;
 
+import com.itlin.common.emun.BizCodeEnum;
 import com.itlin.common.entity.LoginUser;
+import com.itlin.common.excepetion.BizException;
 import com.itlin.common.local.LoginThreadLocal;
 import com.itlin.school.auth.bo.AddressBo;
 import com.itlin.school.auth.convert.AddressBoConvert;
@@ -107,6 +109,26 @@ public class AddressServiceImpl implements AddressService {
         List<AddressBo> addressBos = AddressBoConvert.INSERT.AddressToBoConvertList(list);
         return addressBos;
 
+
+    }
+
+    @Override
+    public void delete(Long address_id) {
+        AddressDo addressDo1 = queryById(address_id);
+        if(addressDo1.getDefaultStatus()==1){
+            throw new BizException(BizCodeEnum.ADDRESS_ERRO);
+        }
+
+
+        LoginUser loginUser = LoginThreadLocal.get();
+        AddressDo addressDo = new AddressDo();
+        addressDo.setUserId(Long.parseLong(String.valueOf(loginUser.getId())));
+        addressDo.setId(address_id);
+        Integer res=addressDao.deleteByIdAndUserId(addressDo);
+        if(res==1){
+            return;
+        }
+        throw new BizException(BizCodeEnum.ADDRESS_INSERT_ERROR);
 
     }
 

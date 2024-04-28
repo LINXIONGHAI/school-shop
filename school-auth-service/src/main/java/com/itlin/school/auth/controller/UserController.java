@@ -41,9 +41,9 @@ public class UserController {
             UserResDto userResDto = UserResDtoConvert.INSERT.UserResDtooConvert(userBo);
             return JsonData.buildSuccess(userResDto);
         } catch (Exception e) {
-            log.error("UserController:get:erro={}", e.getMessage());
-            log.error(BizCodeEnum.SERVICE.getMessage());
-            throw new BizException(BizCodeEnum.SERVICE);
+            e.printStackTrace();
+            BizException bizException= (BizException) e;
+            throw  bizException;
         }
     }
 
@@ -58,8 +58,6 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
             BizException bizException= (BizException) e;
-            log.error("UserController:register:erro={}", e.getMessage());
-            log.error(BizCodeEnum.SERVICE.getMessage());
             throw  bizException;
         }
     }
@@ -75,8 +73,6 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
             BizException bizException= (BizException) e;
-            log.error("UserController:login:erro={}", e.getMessage());
-            log.error(BizCodeEnum.SERVICE.getMessage());
             throw  bizException;
         }
     }

@@ -40,6 +40,9 @@ public enum BizCodeEnum {
     SERVICE(240003, "服务超时，稍后重试"),
 
     FILE_ERRO(240004, "文件上传失败"),
+
+    ADDRESS_INSERT_ERROR(2400009,"删除地址失败"),
+    ADDRESS_ERRO(2400010,"默认地址不能删除"),
     ;
 
     private BizCodeEnum(Integer code, String message) {
