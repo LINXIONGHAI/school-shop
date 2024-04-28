@@ -9,6 +9,7 @@ import com.itlin.common.emun.CouponStatus;
 import com.itlin.common.entity.LoginUser;
 import com.itlin.common.excepetion.BizException;
 import com.itlin.common.local.LoginThreadLocal;
+import com.itlin.common.util.JsonData;
 import com.itlin.coupon.bo.CouponRecordBo;
 import com.itlin.coupon.convert.CouponRecoredBoConvert;
 import com.itlin.coupon.entity.Coupon;
@@ -174,5 +175,31 @@ public class CouponRecordServiceImpl implements CouponRecordService {
         CouponRecordBo couponRecordBo = CouponRecoredBoConvert.INSERT.CONVERTTOBo(couponRecord);
         return couponRecordBo;
 
+    }
+
+    /**
+     * 新用户发放优惠卷
+     *
+     * @param
+     * @return
+     */
+    @Override
+    public JsonData loginCoupon(String userId) {
+        LoginUser loginUser=new LoginUser();
+        loginUser.setId(userId);
+        LoginThreadLocal.set(loginUser);
+        Coupon coupon = new Coupon();
+        coupon.setCategory(CouponCategoryEnum.NEW_USER.name());
+        List<Coupon>list=couponService.queryList(coupon);
+        if(list==null){
+            throw new BizException(BizCodeEnum.COUPON_NEW_ERRO);
+        }
+       list.stream().forEach(item->{
+           Long couponId = item.getId();
+           this.save(String.valueOf(couponId),CouponCategoryEnum.NEW_USER);
+       });
+
+
+        return JsonData.buildSuccess();
     }
 }

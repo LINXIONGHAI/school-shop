@@ -38,6 +38,7 @@ public interface UserDao {
      */
     int insert(UserDo userDo);
 
+
     /**
      * 批量新增数据（MyBatis原生foreach方法）
      *

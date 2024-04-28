@@ -20,7 +20,7 @@ public class GlobalMvcRegister implements WebMvcConfigurer {
         registry.addInterceptor(new LoginIntercept())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/api/user/v1/login", "/api/user/v1/register", "/api/notif/v1/getCapter"
-                        , "/api/notif/v1/sendEmail")
+                        , "/api/notif/v1/sendEmail","/api/couponRecord/v1/new_user_coupon")
         ;
     }
 

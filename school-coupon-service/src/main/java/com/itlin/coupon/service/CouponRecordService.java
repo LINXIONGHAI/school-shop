@@ -1,6 +1,8 @@
 package com.itlin.coupon.service;
 
 import com.itlin.common.emun.CouponCategoryEnum;
+import com.itlin.common.entity.LoginUser;
+import com.itlin.common.util.JsonData;
 import com.itlin.coupon.bo.CouponRecordBo;
 import com.itlin.coupon.entity.CouponRecord;
 
@@ -52,4 +54,7 @@ public interface CouponRecordService {
     List<CouponRecordBo> page(CouponRecordBo converttobo);
 
     CouponRecordBo getById(Long counpRecordId);
+
+    JsonData loginCoupon(String userId);
+
 }

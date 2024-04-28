@@ -48,6 +48,8 @@ spring:
         min-idle: 0
 
 
+
+
   #邮箱服务配置
   mail:
     host: smtp.163.com #发送邮件服务器
@@ -59,6 +61,17 @@ spring:
     properties.mail.smtp.starttls.required: true
     properties.mail.smtp.ssl.enable: true
     default-encoding: utf-8
+
+  #nacos
+  cloud:
+    nacos:
+      server-addr: 117.72.67.117:8848
+      discovery:
+        username: lxh
+        password: Lxh1134153700
+        namespace: dev
+  application:
+    name: school-auth-service
 
 #mybatis日志
 mybatis-plus:

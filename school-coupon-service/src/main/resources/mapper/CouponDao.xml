@@ -211,6 +211,54 @@
         </where>
 
     </select>
+    <select id="queryList" resultType="com.itlin.coupon.entity.Coupon">
+        select *
+        from coupon
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="category != null and category != ''">
+                and category = #{category}
+            </if>
+            <if test="publish != null and publish != ''">
+                and publish = #{publish}
+            </if>
+            <if test="couponImg != null and couponImg != ''">
+                and coupon_img = #{couponImg}
+            </if>
+            <if test="couponTitle != null and couponTitle != ''">
+                and coupon_title = #{couponTitle}
+            </if>
+            <if test="price != null">
+                and price = #{price}
+            </if>
+            <if test="userLimit != null">
+                and user_limit = #{userLimit}
+            </if>
+            <if test="startTime != null">
+                and start_time = #{startTime}
+            </if>
+            <if test="endTime != null">
+                and end_time = #{endTime}
+            </if>
+            <if test="publishCount != null">
+                and publish_count = #{publishCount}
+            </if>
+            <if test="stock != null">
+                and stock = #{stock}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="conditionPrice != null">
+                and condition_price = #{conditionPrice}
+            </if>
+        </where>
+
+
+
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

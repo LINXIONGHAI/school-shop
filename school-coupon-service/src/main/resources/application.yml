@@ -46,7 +46,16 @@ spring:
         max-idle: 10
         # 连接池中的最小空闲连接
         min-idle: 0
-
+  #nacos
+  cloud:
+    nacos:
+      server-addr: 117.72.67.117:8848
+      discovery:
+        username: lxh
+        password: Lxh1134153700
+        namespace: dev
+  application:
+    name: school-coupon-service
 
 #mybatis日志
 mybatis-plus:

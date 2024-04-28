@@ -105,4 +105,10 @@ public class CouponServiceImpl implements CouponService {
     public void incroneByCountStack(Long id) {
         couponDao.incroneByCountStack(id);
     }
+
+    @Override
+    public List<Coupon> queryList(Coupon coupon) {
+
+        return couponDao.queryList(coupon);
+    }
 }

@@ -12,6 +12,7 @@ import com.itlin.school.auth.convert.LoginUserConvert;
 import com.itlin.school.auth.convert.UserBoConvert;
 import com.itlin.school.auth.entity.UserDo;
 import com.itlin.school.auth.dao.UserDao;
+import com.itlin.school.auth.feign.CouponFeignRpc;
 import com.itlin.school.auth.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.Md5Crypt;
@@ -37,6 +38,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private RedisUtil redisUtil;
+
+    @Resource
+    private CouponFeignRpc couponFeignRpc;
 
 
     /**
@@ -115,6 +119,9 @@ public class UserServiceImpl implements UserService {
             userDo.setPwd(pwdSale);
             log.info("pwdSale={}", pwdSale);
             userDao.insert(userDo);
+            //发送优惠卷
+            Object id = userDo.getId();
+            JsonData jsonData = couponFeignRpc.loginCoupon(String.valueOf(id));
             return;
         }
         throw new BizException(BizCodeEnum.CODE_ERROR);

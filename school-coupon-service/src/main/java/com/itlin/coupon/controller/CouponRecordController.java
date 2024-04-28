@@ -1,6 +1,7 @@
 package com.itlin.coupon.controller;
 
 import com.itlin.common.emun.CouponCategoryEnum;
+import com.itlin.common.entity.LoginUser;
 import com.itlin.common.util.JsonData;
 import com.itlin.coupon.bo.CouponRecordBo;
 import com.itlin.coupon.convert.CouponDtoConvert;
@@ -12,11 +13,9 @@ import com.itlin.coupon.entity.Coupon;
 import com.itlin.coupon.entity.CouponRecord;
 import com.itlin.coupon.service.CouponRecordService;
 import com.itlin.coupon.service.CouponService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -67,6 +66,15 @@ public class CouponRecordController {
         return JsonData.buildSuccess(couponRecordDto);
 
     }
+
+
+    @ApiOperation("RPC")
+    @GetMapping("/new_user_coupon")
+    public JsonData loginCoupon(@RequestParam("userId") String userId){
+       return couponRecordService.loginCoupon(userId);
+
+    }
+
 
 
 

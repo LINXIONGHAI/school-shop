@@ -75,5 +75,7 @@ public interface CouponDao {
     Coupon query(Coupon coupon);
 
     void incroneByCountStack(Long id);
+
+    List<Coupon> queryList(Coupon coupon);
 }
 

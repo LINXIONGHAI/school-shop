@@ -49,6 +49,7 @@ public enum BizCodeEnum {
     COUNP_RECORD_ERROR(1563,"领取上限"),
     COUPON_NO_NULL(1564,"优惠卷已被抢光"),
     COUPON_NO_DATE(1565,"优惠卷已过期"),
+    COUPON_NEW_ERRO(1656,"无新人优惠"),
     ;
 
     private BizCodeEnum(Integer code, String message) {
