@@ -36,6 +36,8 @@ public enum BizCodeEnum {
      * 服务异常
      */
     SERVICE(240003, "服务超时，稍后重试"),
+
+    FILE_ERRO(240004, "文件上传失败"),
     ;
 
     private BizCodeEnum(Integer code, String message) {
