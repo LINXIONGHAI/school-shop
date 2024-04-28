@@ -1,7 +1,9 @@
 package com.itlin.school.auth.controller;
 
 import com.itlin.common.emun.BizCodeEnum;
+import com.itlin.common.entity.LoginUser;
 import com.itlin.common.excepetion.BizException;
+import com.itlin.common.local.LoginThreadLocal;
 import com.itlin.common.util.JsonData;
 import com.itlin.redis.util.RedisUtil;
 import com.itlin.school.auth.bo.UserBo;
@@ -29,12 +31,13 @@ public class UserController {
     private UserService userService;
 
 
-    @GetMapping("get/{user_id}")
+    @GetMapping("get")
     @ApiOperation("根据用户id获取用户信息")
-    public JsonData get(@PathVariable Long user_id) {
-        log.info("UserController:get:user_id={}", user_id);
+    public JsonData get() {
+        LoginUser loginUser = LoginThreadLocal.get();
+        log.info("UserController:get:user_id={}", loginUser);
         try {
-            UserDo userDo = userService.queryById(user_id);
+            UserDo userDo = userService.queryById(loginUser.getId());
             return JsonData.buildSuccess(userDo);
         } catch (Exception e) {
             log.error("UserController:get:erro={}", e.getMessage());
