@@ -156,6 +156,16 @@
             </if>
         </where>
     </select>
+    <select id="page" resultType="com.itlin.coupon.entity.CouponRecord">
+        select  * from coupon_record
+        where user_id=#{userId}
+    </select>
+    <select id="queryByIdAndUid" resultType="com.itlin.coupon.entity.CouponRecord">
+        select  * from coupon_record
+        where id=#{counpRecordId}
+        and user_id=#{parseLong}
+
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

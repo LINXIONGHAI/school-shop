@@ -71,5 +71,9 @@ public interface CouponRecordDao {
     int deleteById(Object id);
 
     Integer query(CouponRecord couponRecord1);
+
+    List<CouponRecord> page(Long userId);
+
+    CouponRecord queryByIdAndUid(@Param("counpRecordId") Long counpRecordId, @Param("parseLong")long parseLong);
 }
 

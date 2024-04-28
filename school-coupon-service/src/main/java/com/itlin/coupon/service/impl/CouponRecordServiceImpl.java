@@ -1,22 +1,28 @@
 package com.itlin.coupon.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.itlin.common.emun.BizCodeEnum;
 import com.itlin.common.emun.CouponPublishEnum;
 import com.itlin.common.emun.CouponStatus;
 import com.itlin.common.entity.LoginUser;
 import com.itlin.common.excepetion.BizException;
 import com.itlin.common.local.LoginThreadLocal;
+import com.itlin.coupon.bo.CouponRecordBo;
+import com.itlin.coupon.convert.CouponRecoredBoConvert;
 import com.itlin.coupon.entity.Coupon;
 import com.itlin.coupon.entity.CouponRecord;
 import com.itlin.coupon.dao.CouponRecordDao;
 import com.itlin.coupon.service.CouponRecordService;
 import com.itlin.coupon.service.CouponService;
+import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 
 /**
@@ -85,8 +91,8 @@ public class CouponRecordServiceImpl implements CouponRecordService {
 
     @Transactional
     @Override
-    public synchronized void save(String couponId) {
-        Lock lock = redissonClient.getLock("lock:coupon:"+couponId);
+    public void save(String couponId) {
+        RLock lock = redissonClient.getLock("lock:coupon:"+couponId);
 //阻塞式等待，一个线程获取锁后，其他线程只能等待，和原生的方式循环调用不一样
         lock.lock();
 
@@ -141,6 +147,30 @@ public class CouponRecordServiceImpl implements CouponRecordService {
 
         }
 
+
+    }
+
+    @Override
+    public List<CouponRecordBo> page(CouponRecordBo converttobo) {
+        CouponRecord couponRecord = CouponRecoredBoConvert.INSERT.CONVERTTODo(converttobo);
+        LoginUser loginUser = LoginThreadLocal.get();
+        Long userId = Long.parseLong(String.valueOf(loginUser.getId()));
+        PageHelper.startPage(converttobo.getPage(),converttobo.getPageSize());
+        List<CouponRecord> list = couponRecordDao.page(userId);
+        PageInfo<CouponRecord> pageInfo=new PageInfo<>(list);
+        List<CouponRecord> list1 = pageInfo.getList();
+        List<CouponRecordBo> couponRecordBos = CouponRecoredBoConvert.INSERT.CONVERTTODTOlIST(list1);
+        return couponRecordBos;
+
+
+    }
+
+    @Override
+    public CouponRecordBo getById(Long counpRecordId) {
+        LoginUser loginUser = LoginThreadLocal.get();
+        CouponRecord couponRecord = couponRecordDao.queryByIdAndUid(counpRecordId,Long.parseLong(String.valueOf(loginUser.getId())));
+        CouponRecordBo couponRecordBo = CouponRecoredBoConvert.INSERT.CONVERTTOBo(couponRecord);
+        return couponRecordBo;
 
     }
 }

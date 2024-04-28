@@ -1,6 +1,9 @@
 package com.itlin.coupon.service;
 
+import com.itlin.coupon.bo.CouponRecordBo;
 import com.itlin.coupon.entity.CouponRecord;
+
+import java.util.List;
 
 /**
  * (CouponRecord)表服务接口
@@ -44,4 +47,8 @@ public interface CouponRecordService {
     boolean deleteById(Object id);
 
     void save(String couponId);
+
+    List<CouponRecordBo> page(CouponRecordBo converttobo);
+
+    CouponRecordBo getById(Long counpRecordId);
 }
