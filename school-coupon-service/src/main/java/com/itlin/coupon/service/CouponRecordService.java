@@ -1,5 +1,6 @@
 package com.itlin.coupon.service;
 
+import com.itlin.common.emun.CouponCategoryEnum;
 import com.itlin.coupon.bo.CouponRecordBo;
 import com.itlin.coupon.entity.CouponRecord;
 
@@ -46,7 +47,7 @@ public interface CouponRecordService {
      */
     boolean deleteById(Object id);
 
-    void save(String couponId);
+    void save(String couponId, CouponCategoryEnum couponCategoryEnum);
 
     List<CouponRecordBo> page(CouponRecordBo converttobo);
 

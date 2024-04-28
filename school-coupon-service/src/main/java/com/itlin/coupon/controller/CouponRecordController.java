@@ -1,5 +1,6 @@
 package com.itlin.coupon.controller;
 
+import com.itlin.common.emun.CouponCategoryEnum;
 import com.itlin.common.util.JsonData;
 import com.itlin.coupon.bo.CouponRecordBo;
 import com.itlin.coupon.convert.CouponDtoConvert;
@@ -35,8 +36,8 @@ public class CouponRecordController {
      * @return
      */
     @GetMapping("save")
-    public JsonData save(String couponId){
-        couponRecordService.save(couponId);
+    public JsonData save(String couponId,int type){
+        couponRecordService.save(couponId, CouponCategoryEnum.getByCode(type));
 
         return JsonData.buildSuccess();
 

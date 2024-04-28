@@ -3,6 +3,7 @@ package com.itlin.coupon.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.itlin.common.emun.BizCodeEnum;
+import com.itlin.common.emun.CouponCategoryEnum;
 import com.itlin.common.emun.CouponPublishEnum;
 import com.itlin.common.emun.CouponStatus;
 import com.itlin.common.entity.LoginUser;
@@ -91,7 +92,7 @@ public class CouponRecordServiceImpl implements CouponRecordService {
 
     @Transactional
     @Override
-    public void save(String couponId) {
+    public void save(String couponId, CouponCategoryEnum couponCategoryEnum) {
         RLock lock = redissonClient.getLock("lock:coupon:"+couponId);
 //阻塞式等待，一个线程获取锁后，其他线程只能等待，和原生的方式循环调用不一样
         lock.lock();
@@ -100,6 +101,7 @@ public class CouponRecordServiceImpl implements CouponRecordService {
             Coupon coupon1 = new Coupon();
             coupon1.setId(Long.parseLong(couponId));
             coupon1.setPublish(CouponPublishEnum.PUBLISH.name());
+            coupon1.setCategory(couponCategoryEnum.name());
             Coupon coupon = couponService.query(coupon1);
             if(coupon==null ){
                 throw new BizException(BizCodeEnum.COUPON_NO_PUBLISH);
