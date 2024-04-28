@@ -16,7 +16,7 @@ public class LoginIntercept implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String header = request.getHeader("itlin.token");
         if(header==null){
-            throw new BizException(BizCodeEnum.ACCOUNT_EXPIRE);
+            throw new BizException(BizCodeEnum.NOT_LOGIN);
         }
         Claims claims = CommonUtil.checkJWT(header);
         if(claims==null){
