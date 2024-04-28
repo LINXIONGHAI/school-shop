@@ -9,6 +9,8 @@ import com.itlin.school.auth.convert.UserBoConvert;
 import com.itlin.school.auth.entity.UserDo;
 import com.itlin.school.auth.dao.UserDao;
 import com.itlin.school.auth.service.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.digest.Md5Crypt;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  * @since 2024-04-27 21:56:29
  */
 @Service("userService")
+@Slf4j
 public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
@@ -91,12 +94,15 @@ public class UserServiceImpl implements UserService {
         if (redisVal == null) {
             throw new BizException(BizCodeEnum.CODE_ERROR);
         }
-        if (emailCode.equals(redisVal)) {
+        if (emailCode.equals(redisVal.split("-")[0])) {
             redisUtil.del(emailKey);
             UserDo userDo = UserBoConvert.INSERT.UserDoConvert(userBo);
 
-            String pwd = userDo.getPwd();
-            //TODO 需要对密码进行加密处理
+            String sale = "$1$" + CommonUtil.getStringNumRandom(8);
+            userDo.setSecret(sale);
+            String pwdSale = Md5Crypt.md5Crypt(userDo.getPwd().getBytes(), sale);
+            userDo.setPwd(pwdSale);
+            log.info("pwdSale={}", pwdSale);
             userDao.insert(userDo);
             return;
         }

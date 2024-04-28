@@ -33,6 +33,6 @@ public class MailServiceImpl implements MailService {
         message.setText(content);
         //发送邮件
         mailSender.send(message);
-        log.info("邮件发成功:{}",message.toString());
+        log.info("邮件发成功:{}", message.toString());
     }
 }

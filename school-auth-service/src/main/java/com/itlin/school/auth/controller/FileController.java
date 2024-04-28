@@ -22,15 +22,15 @@ public class FileController {
     private AliyunService aliyunService;
 
     @PostMapping("/uploud")
-    public JsonData uploud(@RequestParam("file") MultipartFile file){
+    public JsonData uploud(@RequestParam("file") MultipartFile file) {
         try {
             return aliyunService.uploudFile(file);
         } catch (Exception e) {
             e.printStackTrace();
-            BizException bizException= (BizException) e;
+            BizException bizException = (BizException) e;
             log.error("UserController:register:erro={}", e.getMessage());
             log.error(BizCodeEnum.SERVICE.getMessage());
-            throw  bizException;
+            throw bizException;
         }
 
     }

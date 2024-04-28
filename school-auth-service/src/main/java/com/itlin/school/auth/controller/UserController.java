@@ -49,7 +49,6 @@ public class UserController {
         log.info("UserController:register:UserDto={}", userDto);
         try {
             UserBo userBo = UserDtoConvert.INSERT.UserBoConvert(userDto);
-
             userService.register(request, userBo);
             return JsonData.buildSuccess();
         } catch (Exception e) {
