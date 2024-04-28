@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://117.72.67.117:3306/school-coupon?characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+    url: jdbc:mysql://117.72.67.117:3306/school-product?characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
     username: root
     password: Lxh1134153700
     type: com.alibaba.druid.pool.DruidDataSource
