@@ -39,5 +39,15 @@ public class CartController {
 
     }
 
+    /**
+     * 删除购物车
+     */
+    @ApiOperation("删除购物车")
+    @GetMapping("/del/{product_id}")
+    public JsonData del(@PathVariable String product_id){
+        return cartService.del(product_id);
+
+    }
+
 
 }

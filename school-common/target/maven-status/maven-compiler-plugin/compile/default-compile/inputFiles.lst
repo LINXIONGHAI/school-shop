@@ -1,8 +1,15 @@
-D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\util\CommonUtil.java
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\excepetion\BizException.java
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\local\LoginThreadLocal.java
+D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\handel\GlobalMvcRegister.java
+D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\emun\CouponCategoryEnum.java
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\excepetion\ExceptionHandle.java
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\config\SwaggerConfiguration.java
-D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\emun\BizCodeEnum.java
+D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\config\PageHelpConfig.java
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\util\JsonData.java
+D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\emun\CouponStatus.java
+D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\util\CommonUtil.java
+D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\util\PageUtils.java
+D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\handel\LoginIntercept.java
+D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\emun\CouponPublishEnum.java
+D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\emun\BizCodeEnum.java
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-common\src\main\java\com\itlin\common\entity\LoginUser.java

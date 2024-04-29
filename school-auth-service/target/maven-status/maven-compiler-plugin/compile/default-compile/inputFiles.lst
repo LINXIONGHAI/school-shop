@@ -3,6 +3,7 @@ D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-auth-service\src\main\java\com\itlin\school\auth\controller\UserController.java
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-auth-service\src\main\java\com\itlin\school\auth\convert\AddressDtoConvert.java
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-auth-service\src\main\java\com\itlin\school\auth\dto\UserResDto.java
+D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-auth-service\src\main\java\com\itlin\school\auth\feign\CouponFeignRpc.java
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-auth-service\src\main\java\com\itlin\school\auth\dto\UserReqDto.java
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-auth-service\src\main\java\com\itlin\school\auth\entity\AddressDo.java
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-auth-service\src\main\java\com\itlin\school\auth\service\impl\AddressServiceImpl.java
@@ -14,8 +15,6 @@ D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-auth-service\src\main\java\com\itlin\school\auth\dao\UserDao.java
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-auth-service\src\main\java\com\itlin\school\auth\convert\LoginUserConvert.java
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-auth-service\src\main\java\com\itlin\school\auth\controller\AddressController.java
-D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-auth-service\src\main\java\com\itlin\school\auth\handel\GlobalMvcRegister.java
-D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-auth-service\src\main\java\com\itlin\school\auth\handel\LoginIntercept.java
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-auth-service\src\main\java\com\itlin\school\auth\dto\AddressReqDto.java
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-auth-service\src\main\java\com\itlin\school\auth\convert\UserDtoConvert.java
 D:\办公视频\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\慕课网-SpringCloudAlibaba高并发仿斗鱼直播平台实战（17章完结）\资料\代码\school-shop\school-auth-service\src\main\java\com\itlin\school\auth\controller\FileController.java

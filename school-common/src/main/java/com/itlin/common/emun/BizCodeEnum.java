@@ -52,7 +52,11 @@ public enum BizCodeEnum {
     COUPON_NEW_ERRO(1656,"无新人优惠"),
 
 
-    PRODUCT_NO_NULL(300001,"没有找到这个商品信息"),
+    PRODUCT_NO_NULL(300001, "没有找到这个商品信息"),
+
+
+
+    CART_NO_PRODUCT(40005,"商品不存在"),
     ;
 
     private BizCodeEnum(Integer code, String message) {

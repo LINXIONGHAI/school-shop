@@ -1,6 +1,5 @@
 com\itlin\school\auth\controller\UserController.class
 com\itlin\school\auth\service\UserService.class
-com\itlin\school\auth\handel\LoginIntercept.class
 com\itlin\school\auth\service\impl\AliyunServiceImpl.class
 com\itlin\school\auth\controller\FileController.class
 com\itlin\school\auth\convert\AddressBoConvert.class
@@ -36,4 +35,4 @@ com\itlin\school\auth\convert\LoginUserConvert.class
 com\itlin\school\auth\convert\LoginUserConvertImpl.class
 com\itlin\school\auth\dao\UserDao.class
 com\itlin\school\auth\service\impl\MailServiceImpl.class
-com\itlin\school\auth\handel\GlobalMvcRegister.class
+com\itlin\school\auth\feign\CouponFeignRpc.class

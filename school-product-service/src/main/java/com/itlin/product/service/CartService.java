@@ -8,4 +8,5 @@ public interface CartService {
 
     JsonData getCartList();
 
+    JsonData del(String product_id);
 }

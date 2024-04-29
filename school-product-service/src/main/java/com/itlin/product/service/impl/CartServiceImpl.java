@@ -18,6 +18,7 @@ import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.stereotype.Service;
+import springfox.documentation.spring.web.json.Json;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -93,6 +94,17 @@ public class CartServiceImpl implements CartService {
 
         return JsonData.buildSuccess(cartBo);
 
+    }
+
+    @Override
+    public JsonData del(String productId) {
+        BoundHashOperations<String, Object, Object> mycats = redisUtil.getBoundHashOperations(myCat());
+        Object redisProduct = mycats.get(productId);
+        if(redisProduct!=null){
+            mycats.delete(productId);
+            return JsonData.buildSuccess();
+        }
+        throw new BizException(BizCodeEnum.CART_NO_PRODUCT);
     }
 
 
