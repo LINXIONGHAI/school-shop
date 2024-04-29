@@ -35,7 +35,7 @@ public class CartBo {
     }
 
     public void setTotal() {
-        this.total=cartItemVoList.stream().mapToInt(CartItemVo::getProductNum).sum();
+        this.total = cartItemVoList.stream().mapToInt(CartItemVo::getProductNum).sum();
     }
 
     public BigDecimal getAmount() {
@@ -43,11 +43,12 @@ public class CartBo {
     }
 
     public void setAmount() {
-        BigDecimal bigDecimal=new BigDecimal("0");
-        if(cartItemVoList!=null){
-            cartItemVoList.stream().forEach((item)->{
-                bigDecimal.add(item.getProductTilalAmount());
-            });
+        BigDecimal bigDecimal = new BigDecimal("0");
+        if (cartItemVoList != null) {
+            for (int i = 0; i < cartItemVoList.size(); i++) {
+                CartItemVo cartItemVo = cartItemVoList.get(i);
+                bigDecimal = bigDecimal.add(cartItemVo.getProductTilalAmount());
+            }
         }
 
         this.amount = bigDecimal;
@@ -58,11 +59,12 @@ public class CartBo {
     }
 
     public void setAmountSum() {
-        BigDecimal bigDecimal=new BigDecimal("0");
-        if(cartItemVoList!=null){
-            cartItemVoList.stream().forEach((item)->{
-                bigDecimal.add(item.getProductTilalAmount());
-            });
+        BigDecimal bigDecimal = new BigDecimal("0");
+        if (cartItemVoList != null) {
+            for (int i = 0; i < cartItemVoList.size(); i++) {
+                CartItemVo cartItemVo = cartItemVoList.get(i);
+                bigDecimal = bigDecimal.add(cartItemVo.getProductTilalAmount());
+            }
         }
 
         this.amountSum = bigDecimal;

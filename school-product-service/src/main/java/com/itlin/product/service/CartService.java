@@ -6,4 +6,6 @@ import com.itlin.product.dto.CartSaveDto;
 public interface CartService {
     JsonData add(CartSaveDto cartSaveDto);
 
+    JsonData getCartList();
+
 }

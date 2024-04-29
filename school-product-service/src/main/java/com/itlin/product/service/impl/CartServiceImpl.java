@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.*;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -63,10 +64,35 @@ public class CartServiceImpl implements CartService {
             String str = String.valueOf(json);
             CartItemVo cartItemVo = gson.fromJson(str, CartItemVo.class);
             cartItemVo.setProductNum(cartItemVo.getProductNum() + productNum);
+            cartItemVo.setProductTilalAmount();
             boundHashOperations.put(productIdStr, gson.toJson(cartItemVo));
 
         }
         return JsonData.buildSuccess();
+    }
+
+    @Override
+    public JsonData getCartList() {
+        BoundHashOperations<String, Object, Object> myCatAll = redisUtil.getBoundHashOperations(myCat());
+        if (myCatAll == null) {
+            return null;
+        }
+        List<Object> items = myCatAll.values();
+        Gson gson = new Gson();
+        CartBo cartBo=new CartBo();
+        List<CartItemVo> list=new ArrayList<>();
+        for (int i = 0; i < items.size(); i++) {
+            Object o = items.get(i);
+            CartItemVo cartItemVo=gson.fromJson(o.toString(),CartItemVo.class);
+            list.add(cartItemVo);
+        }
+        cartBo.setCartItemVoList(list);
+        cartBo.setAmount();
+        cartBo.setAmountSum();
+        cartBo.setTotal();
+
+        return JsonData.buildSuccess(cartBo);
+
     }
 
 

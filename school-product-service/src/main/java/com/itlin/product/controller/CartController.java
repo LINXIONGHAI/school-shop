@@ -29,4 +29,15 @@ public class CartController {
 
     }
 
+    /**
+     * 获取我的购物车列表
+     */
+    @ApiOperation("获取我的购物车列表")
+    @GetMapping("/getCartList")
+    public JsonData getCartList(){
+        return cartService.getCartList();
+
+    }
+
+
 }
