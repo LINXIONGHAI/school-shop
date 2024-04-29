@@ -1,18 +1,18 @@
 package com.itlin.product.controller;
 
-        import com.itlin.common.util.JsonData;
-        import com.itlin.product.bo.BannerResBo;
-        import com.itlin.product.bo.ProductReqBo;
-        import com.itlin.product.bo.ProductResBo;
-        import com.itlin.product.convert.ProductBoToDto;
-        import com.itlin.product.convert.ProductDtoToBo;
-        import com.itlin.product.dto.ProductReqDto;
-        import com.itlin.product.service.ProductService;
-        import io.swagger.annotations.ApiOperation;
-        import org.springframework.web.bind.annotation.*;
+import com.itlin.common.util.JsonData;
+import com.itlin.product.bo.BannerResBo;
+import com.itlin.product.bo.ProductReqBo;
+import com.itlin.product.bo.ProductResBo;
+import com.itlin.product.convert.ProductBoToDto;
+import com.itlin.product.convert.ProductDtoToBo;
+import com.itlin.product.dto.ProductReqDto;
+import com.itlin.product.service.ProductService;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
-        import javax.annotation.Resource;
-        import java.util.List;
+import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/product/v1")
