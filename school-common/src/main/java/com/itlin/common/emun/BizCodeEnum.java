@@ -50,6 +50,9 @@ public enum BizCodeEnum {
     COUPON_NO_NULL(1564,"优惠卷已被抢光"),
     COUPON_NO_DATE(1565,"优惠卷已过期"),
     COUPON_NEW_ERRO(1656,"无新人优惠"),
+
+
+    PRODUCT_NO_NULL(300001,"没有找到这个商品信息"),
     ;
 
     private BizCodeEnum(Integer code, String message) {

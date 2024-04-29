@@ -91,7 +91,7 @@ public class CartItemVo {
     }
 
     public void setProductTilalAmount() {
-        this.productTilalAmount= this.productTilalAmount.multiply(new BigDecimal(String.valueOf(this.productNum)));
+        this.productTilalAmount= this.productAmout.multiply(new BigDecimal(String.valueOf(this.productNum)));
 
     }
 }

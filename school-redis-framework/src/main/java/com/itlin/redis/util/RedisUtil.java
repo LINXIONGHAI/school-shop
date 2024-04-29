@@ -1,6 +1,7 @@
 package com.itlin.redis.util;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -69,6 +70,10 @@ public class RedisUtil {
 
     public Boolean zAdd(String key, String value, Long score) {
         return redisTemplate.opsForZSet().add(key, value, Double.valueOf(String.valueOf(score)));
+    }
+
+    public BoundHashOperations getBoundHashOperations(String key){
+        return redisTemplate.boundHashOps(key);
     }
 
     public Long countZset(String key) {
