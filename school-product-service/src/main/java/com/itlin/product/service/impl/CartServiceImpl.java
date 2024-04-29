@@ -80,11 +80,11 @@ public class CartServiceImpl implements CartService {
         }
         List<Object> items = myCatAll.values();
         Gson gson = new Gson();
-        CartBo cartBo=new CartBo();
-        List<CartItemVo> list=new ArrayList<>();
+        CartBo cartBo = new CartBo();
+        List<CartItemVo> list = new ArrayList<>();
         for (int i = 0; i < items.size(); i++) {
             Object o = items.get(i);
-            CartItemVo cartItemVo=gson.fromJson(o.toString(),CartItemVo.class);
+            CartItemVo cartItemVo = gson.fromJson(o.toString(), CartItemVo.class);
             list.add(cartItemVo);
         }
         cartBo.setCartItemVoList(list);
@@ -100,11 +100,32 @@ public class CartServiceImpl implements CartService {
     public JsonData del(String productId) {
         BoundHashOperations<String, Object, Object> mycats = redisUtil.getBoundHashOperations(myCat());
         Object redisProduct = mycats.get(productId);
-        if(redisProduct!=null){
+        if (redisProduct != null) {
             mycats.delete(productId);
             return JsonData.buildSuccess();
         }
         throw new BizException(BizCodeEnum.CART_NO_PRODUCT);
+    }
+
+
+    @Override
+    public JsonData changeCart(String productId, String productNum) {
+        BoundHashOperations<String, Object, Object> boundHashOperations = redisUtil.getBoundHashOperations(myCat());
+        List<Object> list = boundHashOperations.values();
+        CartItemVo cartItemVo = new CartItemVo();
+        Gson gson = new Gson();
+        for (int i = 0; i < list.size(); i++) {
+            Object o = list.get(i);
+            CartItemVo cartItemVo1 = gson.fromJson(o.toString(), CartItemVo.class);
+            if (cartItemVo1.getProduct() == Integer.parseInt(productId)) {
+                cartItemVo = cartItemVo1;
+            }
+        }
+        cartItemVo.setProductNum(Integer.parseInt(productNum));
+        cartItemVo.setProductTilalAmount();
+        boundHashOperations.put(productId, gson.toJson(cartItemVo));
+        return JsonData.buildSuccess();
+
     }
 
 
