@@ -23,8 +23,8 @@ public class BannerController {
     @ApiOperation("查询主页轮播图")
     @GetMapping("bannerList")
     public JsonData bannerList(@RequestParam(defaultValue = "1") int page,
-                               @RequestParam(defaultValue = "3") int pageSize){
-        List<BannerResBo>  list = bannerService.bannerList(page, pageSize);
+                               @RequestParam(defaultValue = "3") int pageSize) {
+        List<BannerResBo> list = bannerService.bannerList(page, pageSize);
         return JsonData.buildSuccess(list);
 
 
