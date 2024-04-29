@@ -20,6 +20,7 @@ public class BannerController {
     @Resource
     private BannerService bannerService;
 
+
     @ApiOperation("查询主页轮播图")
     @GetMapping("bannerList")
     public JsonData bannerList(@RequestParam(defaultValue = "1") int page,
