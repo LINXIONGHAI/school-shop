@@ -73,8 +73,8 @@ public class BannerServiceImpl implements BannerService {
     @Override
     public List<BannerResBo> bannerList(int page, int pageSize) {
 
-        PageHelper.startPage(page,pageSize);
-        List<Banner> list=bannerDao.bannerList();
+        PageHelper.startPage(page, pageSize);
+        List<Banner> list = bannerDao.bannerList();
         List<BannerResBo> bannerResBos = BannerBoToDto.INSERT.ToList(list);
         return bannerResBos;
 
