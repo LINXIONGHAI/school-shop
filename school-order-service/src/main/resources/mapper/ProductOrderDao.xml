@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itlin.order.dao.ProductOrderDao">
+
+    <resultMap type="com.itlin.order.entity.ProductOrder" id="ProductOrderMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="outTradeNo" column="out_trade_no" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="totalAmount" column="total_amount" jdbcType="NUMERIC"/>
+        <result property="payAmount" column="pay_amount" jdbcType="NUMERIC"/>
+        <result property="payType" column="pay_type" jdbcType="VARCHAR"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="headImg" column="head_img" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="del" column="del" jdbcType="INTEGER"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="orderType" column="order_type" jdbcType="VARCHAR"/>
+        <result property="receiverAddress" column="receiver_address" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ProductOrderMap">
+        select
+          id, out_trade_no, state, create_time, total_amount, pay_amount, pay_type, nickname, head_img, user_id, del, update_time, order_type, receiver_address
+        from product_order
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ProductOrderMap">
+        select
+          id, out_trade_no, state, create_time, total_amount, pay_amount, pay_type, nickname, head_img, user_id, del, update_time, order_type, receiver_address
+        from product_order
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="outTradeNo != null and outTradeNo != ''">
+                and out_trade_no = #{outTradeNo}
+            </if>
+            <if test="state != null and state != ''">
+                and state = #{state}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="totalAmount != null">
+                and total_amount = #{totalAmount}
+            </if>
+            <if test="payAmount != null">
+                and pay_amount = #{payAmount}
+            </if>
+            <if test="payType != null and payType != ''">
+                and pay_type = #{payType}
+            </if>
+            <if test="nickname != null and nickname != ''">
+                and nickname = #{nickname}
+            </if>
+            <if test="headImg != null and headImg != ''">
+                and head_img = #{headImg}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="del != null">
+                and del = #{del}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="orderType != null and orderType != ''">
+                and order_type = #{orderType}
+            </if>
+            <if test="receiverAddress != null and receiverAddress != ''">
+                and receiver_address = #{receiverAddress}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from product_order
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="outTradeNo != null and outTradeNo != ''">
+                and out_trade_no = #{outTradeNo}
+            </if>
+            <if test="state != null and state != ''">
+                and state = #{state}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="totalAmount != null">
+                and total_amount = #{totalAmount}
+            </if>
+            <if test="payAmount != null">
+                and pay_amount = #{payAmount}
+            </if>
+            <if test="payType != null and payType != ''">
+                and pay_type = #{payType}
+            </if>
+            <if test="nickname != null and nickname != ''">
+                and nickname = #{nickname}
+            </if>
+            <if test="headImg != null and headImg != ''">
+                and head_img = #{headImg}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="del != null">
+                and del = #{del}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="orderType != null and orderType != ''">
+                and order_type = #{orderType}
+            </if>
+            <if test="receiverAddress != null and receiverAddress != ''">
+                and receiver_address = #{receiverAddress}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into product_order(out_trade_no, state, create_time, total_amount, pay_amount, pay_type, nickname, head_img, user_id, del, update_time, order_type, receiver_address)
+        values (#{outTradeNo}, #{state}, #{createTime}, #{totalAmount}, #{payAmount}, #{payType}, #{nickname}, #{headImg}, #{userId}, #{del}, #{updateTime}, #{orderType}, #{receiverAddress})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into product_order(out_trade_no, state, create_time, total_amount, pay_amount, pay_type, nickname, head_img, user_id, del, update_time, order_type, receiver_address)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.outTradeNo}, #{entity.state}, #{entity.createTime}, #{entity.totalAmount}, #{entity.payAmount}, #{entity.payType}, #{entity.nickname}, #{entity.headImg}, #{entity.userId}, #{entity.del}, #{entity.updateTime}, #{entity.orderType}, #{entity.receiverAddress})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into product_order(out_trade_no, state, create_time, total_amount, pay_amount, pay_type, nickname, head_img, user_id, del, update_time, order_type, receiver_address)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.outTradeNo}, #{entity.state}, #{entity.createTime}, #{entity.totalAmount}, #{entity.payAmount}, #{entity.payType}, #{entity.nickname}, #{entity.headImg}, #{entity.userId}, #{entity.del}, #{entity.updateTime}, #{entity.orderType}, #{entity.receiverAddress})
+        </foreach>
+        on duplicate key update
+        out_trade_no = values(out_trade_no),
+        state = values(state),
+        create_time = values(create_time),
+        total_amount = values(total_amount),
+        pay_amount = values(pay_amount),
+        pay_type = values(pay_type),
+        nickname = values(nickname),
+        head_img = values(head_img),
+        user_id = values(user_id),
+        del = values(del),
+        update_time = values(update_time),
+        order_type = values(order_type),
+        receiver_address = values(receiver_address)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update product_order
+        <set>
+            <if test="outTradeNo != null and outTradeNo != ''">
+                out_trade_no = #{outTradeNo},
+            </if>
+            <if test="state != null and state != ''">
+                state = #{state},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="totalAmount != null">
+                total_amount = #{totalAmount},
+            </if>
+            <if test="payAmount != null">
+                pay_amount = #{payAmount},
+            </if>
+            <if test="payType != null and payType != ''">
+                pay_type = #{payType},
+            </if>
+            <if test="nickname != null and nickname != ''">
+                nickname = #{nickname},
+            </if>
+            <if test="headImg != null and headImg != ''">
+                head_img = #{headImg},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="del != null">
+                del = #{del},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="orderType != null and orderType != ''">
+                order_type = #{orderType},
+            </if>
+            <if test="receiverAddress != null and receiverAddress != ''">
+                receiver_address = #{receiverAddress},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from product_order where id = #{id}
+    </delete>
+
+</mapper>
+

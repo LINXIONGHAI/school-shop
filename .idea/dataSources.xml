@@ -19,5 +19,11 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://117.72.67.117:3306/school-product</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="school-order@117.72.67.117" uuid="ef0a3a8f-7aa5-42b6-bcf1-62fb19db7a2c">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://117.72.67.117:3306/school-order</jdbc-url>
+    </data-source>
   </component>
 </project>
