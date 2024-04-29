@@ -1,6 +1,11 @@
 package com.itlin.product.service;
 
+import com.itlin.product.bo.ProductReqBo;
+import com.itlin.product.bo.ProductResBo;
+import com.itlin.product.dto.ProductReqDto;
 import com.itlin.product.entity.Product;
+
+import java.util.List;
 
 /**
  * (Product)表服务接口
@@ -42,5 +47,7 @@ public interface ProductService {
      * @return 是否成功
      */
     boolean deleteById(Object id);
+
+    List<ProductResBo> list(ProductReqBo productReqBo);
 
 }

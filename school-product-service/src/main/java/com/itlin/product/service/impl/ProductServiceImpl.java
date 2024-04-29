@@ -1,11 +1,19 @@
 package com.itlin.product.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.itlin.product.bo.ProductReqBo;
+import com.itlin.product.bo.ProductResBo;
+import com.itlin.product.convert.ProductBoToDto;
+import com.itlin.product.convert.ProductToBo;
+import com.itlin.product.dto.ProductReqDto;
 import com.itlin.product.entity.Product;
 import com.itlin.product.dao.ProductDao;
 import com.itlin.product.service.ProductService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (Product)表服务实现类
@@ -63,5 +71,17 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public boolean deleteById(Object id) {
         return this.productDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<ProductResBo> list(ProductReqBo productReqBo) {
+        PageHelper.startPage(productReqBo.getPage(), productReqBo.getPageSize());
+        Product product = new Product();
+        List<Product> list = productDao.listPage(product);
+        PageInfo<Product> pageInfo = new PageInfo(list);
+        List<Product> productList = pageInfo.getList();
+        List<ProductResBo> productResBos = ProductToBo.INSERT.ToList(productList);
+        return  productResBos;
+
     }
 }

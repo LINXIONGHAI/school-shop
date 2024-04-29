@@ -70,5 +70,7 @@ public interface ProductDao {
      */
     int deleteById(Object id);
 
+    List<Product> listPage(Product product);
+
 }
 

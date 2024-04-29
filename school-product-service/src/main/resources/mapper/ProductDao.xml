@@ -93,6 +93,42 @@
             </if>
         </where>
     </select>
+    <select id="listPage" resultType="com.itlin.product.entity.Product">
+        select *
+        from product
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="title != null and title != ''">
+                and title = #{title}
+            </if>
+            <if test="coverImg != null and coverImg != ''">
+                and cover_img = #{coverImg}
+            </if>
+            <if test="detail != null and detail != ''">
+                and detail = #{detail}
+            </if>
+            <if test="oldPrice != null">
+                and old_price = #{oldPrice}
+            </if>
+            <if test="price != null">
+                and price = #{price}
+            </if>
+            <if test="stock != null">
+                and stock = #{stock}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="lockStock != null">
+                and lock_stock = #{lockStock}
+            </if>
+        </where>
+
+
+
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
