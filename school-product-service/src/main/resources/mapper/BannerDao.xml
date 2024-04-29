@@ -60,6 +60,7 @@
     </select>
     <select id="bannerList" resultType="com.itlin.product.entity.Banner">
         select * from banner
+        order by weight asc
     </select>
 
     <!--新增所有列-->
