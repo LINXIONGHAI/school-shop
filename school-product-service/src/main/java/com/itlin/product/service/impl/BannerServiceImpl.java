@@ -1,11 +1,16 @@
 package com.itlin.product.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.itlin.product.bo.BannerResBo;
+import com.itlin.product.convert.BannerBoToDto;
+import com.itlin.product.dto.BannerResDto;
 import com.itlin.product.entity.Banner;
 import com.itlin.product.dao.BannerDao;
 import com.itlin.product.service.BannerService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (Banner)表服务实现类
@@ -63,5 +68,16 @@ public class BannerServiceImpl implements BannerService {
     @Override
     public boolean deleteById(Integer id) {
         return this.bannerDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<BannerResBo> bannerList(int page, int pageSize) {
+
+        PageHelper.startPage(page,pageSize);
+        List<Banner> list=bannerDao.bannerList();
+        List<BannerResBo> bannerResBos = BannerBoToDto.INSERT.ToList(list);
+        return bannerResBos;
+
+
     }
 }

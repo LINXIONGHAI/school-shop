@@ -1,6 +1,10 @@
 package com.itlin.product.service;
 
+import com.itlin.product.bo.BannerResBo;
+import com.itlin.product.dto.BannerResDto;
 import com.itlin.product.entity.Banner;
+
+import java.util.List;
 
 /**
  * (Banner)表服务接口
@@ -43,4 +47,5 @@ public interface BannerService {
      */
     boolean deleteById(Integer id);
 
+    List<BannerResBo>  bannerList(int page, int pageSize);
 }

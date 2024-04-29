@@ -58,6 +58,9 @@
             </if>
         </where>
     </select>
+    <select id="bannerList" resultType="com.itlin.product.entity.Banner">
+        select * from banner
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

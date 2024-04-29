@@ -70,5 +70,6 @@ public interface BannerDao {
      */
     int deleteById(Integer id);
 
+    List<Banner> bannerList();
 }
 
