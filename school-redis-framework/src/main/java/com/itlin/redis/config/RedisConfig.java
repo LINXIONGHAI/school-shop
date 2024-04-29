@@ -68,7 +68,10 @@ public class RedisConfig {
 
         //单机模式
         //config.useSingleServer().setPassword("123456").setAddress("redis://8.129.113.233:3308");
-        config.useSingleServer().setPassword(redisPwd).setAddress("redis://"+redisHost+":"+redisPort);
+        config.useSingleServer()
+                .setPassword(redisPwd)
+                .setDatabase(1)
+                .setAddress("redis://"+redisHost+":"+redisPort);
 
         //集群模式
         //config.useClusterServers()
