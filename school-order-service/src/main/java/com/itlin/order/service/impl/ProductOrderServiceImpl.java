@@ -105,7 +105,8 @@ public class ProductOrderServiceImpl implements ProductOrderService {
         }
         prouductStr = data.toString();
         //数据库商品的数据
-        Type type = new TypeToken<List<ProductRpc>>(){}.getType();
+        Type type = new TypeToken<List<ProductRpc>>() {
+        }.getType();
         List<ProductRpc> list = gson.fromJson(prouductStr, type);
 
 
@@ -125,7 +126,6 @@ public class ProductOrderServiceImpl implements ProductOrderService {
         BigDecimal bigDecimal = getAmountAll(list, redisList);
         //发起支付
 
-//1020
         return JsonData.buildSuccess("<h1>你好</h1>");
 
 
