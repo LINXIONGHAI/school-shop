@@ -84,4 +84,11 @@ public class ProductServiceImpl implements ProductService {
         return  productResBos;
 
     }
+
+    @Override
+    public ProductResBo detail(int id) {
+
+        Product product = this.queryById(id);
+        return ProductToBo.INSERT.ToBo(product);
+    }
 }

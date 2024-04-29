@@ -15,4 +15,5 @@ public interface ProductToBo {
     List<ProductResBo>  ToList(List<Product> list);
 
 
+    ProductResBo ToBo(Product product);
 }

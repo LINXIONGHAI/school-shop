@@ -17,4 +17,5 @@ public interface ProductBoToDto {
     List<ProductReqDto>  ToList(List<ProductResBo> list);
 
 
+    ProductReqDto ToReq(ProductResBo productResBo);
 }

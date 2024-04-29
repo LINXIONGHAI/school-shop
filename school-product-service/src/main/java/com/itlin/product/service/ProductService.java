@@ -50,4 +50,5 @@ public interface ProductService {
 
     List<ProductResBo> list(ProductReqBo productReqBo);
 
+    ProductResBo detail(int id);
 }
