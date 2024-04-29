@@ -72,5 +72,6 @@ public interface ProductDao {
 
     List<Product> listPage(Product product);
 
+    List<Product> getListByIds(@Param("ids") List<Integer> ids);
 }
 

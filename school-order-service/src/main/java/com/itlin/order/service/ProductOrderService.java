@@ -1,5 +1,7 @@
 package com.itlin.order.service;
 
+import com.itlin.common.util.JsonData;
+import com.itlin.order.dto.ProductOrderSaveDto;
 import com.itlin.order.entity.ProductOrder;
 
 /**
@@ -42,5 +44,7 @@ public interface ProductOrderService {
      * @return 是否成功
      */
     boolean deleteById(Long id);
+
+    JsonData createOrder(ProductOrderSaveDto saveDto);
 
 }

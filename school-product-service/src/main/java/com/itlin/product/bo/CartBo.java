@@ -1,5 +1,7 @@
 package com.itlin.product.bo;
 
+import com.itlin.common.entity.CartItemVo;
+
 import java.math.BigDecimal;
 import java.util.List;
 

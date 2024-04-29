@@ -129,6 +129,14 @@
 
 
     </select>
+    <select id="getListByIds" resultType="com.itlin.product.entity.Product">
+        select * from product
+        where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

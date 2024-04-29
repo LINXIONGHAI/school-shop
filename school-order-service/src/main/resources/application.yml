@@ -26,6 +26,17 @@ spring:
         wall:
           enabled: true
 
+  #nacos
+  cloud:
+    nacos:
+      server-addr: 117.72.67.117:8848
+      discovery:
+        username: lxh
+        password: Lxh1134153700
+        namespace: dev
+  application:
+    name: school-order-service
+
   redis:
     # Redis数据库索引（默认为0）
     database: 1

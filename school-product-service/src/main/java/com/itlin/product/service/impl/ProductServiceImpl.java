@@ -2,10 +2,15 @@ package com.itlin.product.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
+import com.itlin.common.feign.ProductRpc;
+import com.itlin.common.feign.dto.ProduceRpcReqDto;
+import com.itlin.common.util.JsonData;
 import com.itlin.product.bo.ProductReqBo;
 import com.itlin.product.bo.ProductResBo;
 import com.itlin.product.convert.ProductBoToDto;
 import com.itlin.product.convert.ProductToBo;
+import com.itlin.product.convert.RpcConvert;
 import com.itlin.product.dto.ProductReqDto;
 import com.itlin.product.entity.Product;
 import com.itlin.product.dao.ProductDao;
@@ -90,5 +95,16 @@ public class ProductServiceImpl implements ProductService {
 
         Product product = this.queryById(id);
         return ProductToBo.INSERT.ToBo(product);
+    }
+
+    @Override
+    public JsonData getListByIds(ProduceRpcReqDto produceRpcReqDto) {
+        List<Product> list = productDao.getListByIds(produceRpcReqDto.getIds());
+        List<ProductRpc> list1=RpcConvert.RPC.ProductToRpcList(list);
+
+        Gson gson = new Gson();
+        return  JsonData.buildSuccess(gson.toJson(list1));
+
+
     }
 }

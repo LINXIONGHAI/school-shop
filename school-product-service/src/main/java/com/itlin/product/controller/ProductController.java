@@ -1,5 +1,7 @@
 package com.itlin.product.controller;
 
+import com.itlin.common.feign.ProductRpc;
+import com.itlin.common.feign.dto.ProduceRpcReqDto;
 import com.itlin.common.util.JsonData;
 import com.itlin.product.bo.BannerResBo;
 import com.itlin.product.bo.ProductReqBo;
@@ -12,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -40,5 +43,11 @@ public class ProductController {
         return JsonData.buildSuccess(productReqDto);
 
 
+    }
+
+    @ApiOperation("RPC")
+    @PostMapping("/getListByIds")
+    public JsonData getListByIds(@RequestBody ProduceRpcReqDto produceRpcReqDto) {
+       return productService.getListByIds(produceRpcReqDto);
     }
 }

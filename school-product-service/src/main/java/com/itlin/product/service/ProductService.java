@@ -1,5 +1,8 @@
 package com.itlin.product.service;
 
+import com.itlin.common.feign.ProductRpc;
+import com.itlin.common.feign.dto.ProduceRpcReqDto;
+import com.itlin.common.util.JsonData;
 import com.itlin.product.bo.ProductReqBo;
 import com.itlin.product.bo.ProductResBo;
 import com.itlin.product.dto.ProductReqDto;
@@ -51,4 +54,6 @@ public interface ProductService {
     List<ProductResBo> list(ProductReqBo productReqBo);
 
     ProductResBo detail(int id);
+
+    JsonData getListByIds(ProduceRpcReqDto produceRpcReqDto);
 }
