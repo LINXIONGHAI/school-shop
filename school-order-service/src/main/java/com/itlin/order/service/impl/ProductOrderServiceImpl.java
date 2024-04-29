@@ -114,6 +114,7 @@ public class ProductOrderServiceImpl implements ProductOrderService {
         if (boundHashOperations == null) {
             throw new BizException(500, "请添加购物车");
         }
+
         //redis选中的商品信息
         List<CartItemVo> redisList = new ArrayList<>();
         //手机
