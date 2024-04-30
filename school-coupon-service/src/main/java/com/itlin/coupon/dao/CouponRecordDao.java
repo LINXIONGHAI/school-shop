@@ -2,6 +2,8 @@ package com.itlin.coupon.dao;
 
 import com.itlin.coupon.entity.CouponRecord;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -75,5 +77,8 @@ public interface CouponRecordDao {
     List<CouponRecord> page(Long userId);
 
     CouponRecord queryByIdAndUid(@Param("counpRecordId") Long counpRecordId, @Param("parseLong")long parseLong);
+
+    CouponRecord getByIdAndUserId(@Param("couponId") String couponId,@Param("userId") String userId,
+                                  @Param("states")String states, @Param("date") Date date);
 }
 

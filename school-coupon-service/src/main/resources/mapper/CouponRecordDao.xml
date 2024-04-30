@@ -166,6 +166,17 @@
         and user_id=#{parseLong}
 
     </select>
+    <select id="getByIdAndUserId" resultType="com.itlin.coupon.entity.CouponRecord">
+        select * from coupon_record
+        where coupon_id = #{couponId}
+        and  use_state=#{states}
+        and user_id=#{userId}
+        and   start_time &lt; curdate()
+        and  end_time &gt; curdate()
+
+
+
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

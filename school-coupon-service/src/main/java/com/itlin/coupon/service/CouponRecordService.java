@@ -6,6 +6,7 @@ import com.itlin.common.util.JsonData;
 import com.itlin.coupon.bo.CouponRecordBo;
 import com.itlin.coupon.entity.CouponRecord;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,4 +58,5 @@ public interface CouponRecordService {
 
     JsonData loginCoupon(String userId);
 
+    CouponRecord getByIdAndUserId(String couponId, String userId, String name, Date date);
 }

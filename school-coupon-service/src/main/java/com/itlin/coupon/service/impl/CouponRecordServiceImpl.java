@@ -202,4 +202,12 @@ public class CouponRecordServiceImpl implements CouponRecordService {
 
         return JsonData.buildSuccess();
     }
+
+    @Override
+    public CouponRecord getByIdAndUserId(String couponId, String userId, String states, Date date) {
+
+        return couponRecordDao.getByIdAndUserId(couponId,userId,states,date);
+
+
+    }
 }
