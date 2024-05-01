@@ -56,4 +56,6 @@ public interface ProductService {
     ProductResBo detail(int id);
 
     JsonData getListByIds(ProduceRpcReqDto produceRpcReqDto);
+
+
 }

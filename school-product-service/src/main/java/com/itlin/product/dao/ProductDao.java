@@ -73,5 +73,9 @@ public interface ProductDao {
     List<Product> listPage(Product product);
 
     List<Product> getListByIds(@Param("ids") List<Integer> ids);
+
+    void lock(@Param("productId") Integer productId, @Param("productNum")Integer productNum);
+
+    int queryByIdAndStok(@Param("product") Integer product, @Param("productNum") Integer productNum);
 }
 

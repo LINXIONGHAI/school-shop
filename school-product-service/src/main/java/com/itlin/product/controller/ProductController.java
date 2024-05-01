@@ -50,4 +50,7 @@ public class ProductController {
     public JsonData getListByIds(@RequestBody ProduceRpcReqDto produceRpcReqDto) {
        return productService.getListByIds(produceRpcReqDto);
     }
+
+
+
 }

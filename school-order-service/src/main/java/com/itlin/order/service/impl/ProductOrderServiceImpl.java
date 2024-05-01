@@ -2,6 +2,7 @@ package com.itlin.order.service.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.itlin.common.emun.BizCodeEnum;
 import com.itlin.common.entity.CartItemVo;
 import com.itlin.common.entity.LoginUser;
 import com.itlin.common.excepetion.BizException;
@@ -12,6 +13,7 @@ import com.itlin.common.util.JsonData;
 import com.itlin.order.dto.ProductOrderSaveDto;
 import com.itlin.order.entity.ProductOrder;
 import com.itlin.order.dao.ProductOrderDao;
+import com.itlin.order.feign.CouponFeignRpc;
 import com.itlin.order.feign.ProductServiceRpc;
 import com.itlin.order.service.ProductOrderService;
 import com.itlin.redis.util.RedisUtil;
@@ -24,6 +26,7 @@ import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * (ProductOrder)表服务实现类
@@ -41,6 +44,9 @@ public class ProductOrderServiceImpl implements ProductOrderService {
 
     @Resource
     private RedisUtil redisUtil;
+
+    @Resource
+    private CouponFeignRpc couponFeignRpc;
 
     /**
      * 通过ID查询单条数据
@@ -124,8 +130,19 @@ public class ProductOrderServiceImpl implements ProductOrderService {
             CartItemVo cartItemVo = gson.fromJson(redisCatVal, CartItemVo.class);
             redisList.add(cartItemVo);
         }
+
+        //没有扣除优惠卷的价格
         BigDecimal bigDecimal = getAmountAll(list, redisList);
         //发起支付
+
+        //锁定优惠卷
+        JsonData jsonData = couponFeignRpc.lockCoupon(saveDto.getCouponId().toString(), UUID.randomUUID().toString());
+        if (jsonData.getCode() != 0) {
+            throw new BizException(500,jsonData.getData().toString());
+        }
+        //锁定库存
+
+
 
         return JsonData.buildSuccess("<h1>你好</h1>");
 
