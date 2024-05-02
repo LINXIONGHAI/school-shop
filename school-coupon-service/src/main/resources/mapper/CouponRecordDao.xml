@@ -252,6 +252,14 @@
         </set>
         where id = #{id}
     </update>
+    <update id="updateLockStates">
+        update coupon_record
+        set use_state=#{status}
+        where user_id=#{userId}
+        and id=#{couponRecordId}
+
+
+    </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">

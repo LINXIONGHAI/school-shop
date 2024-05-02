@@ -70,5 +70,6 @@ public interface ProductOrderDao {
      */
     int deleteById(Long id);
 
+    ProductOrder getByOutTrane(String outTraneId);
 }
 

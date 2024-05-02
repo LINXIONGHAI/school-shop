@@ -8,6 +8,7 @@ import com.itlin.common.entity.LoginUser;
 import com.itlin.common.excepetion.BizException;
 import com.itlin.common.feign.ProductRpc;
 import com.itlin.common.feign.dto.ProduceRpcReqDto;
+import com.itlin.common.feign.dto.ProductLockStockDto;
 import com.itlin.common.local.LoginThreadLocal;
 import com.itlin.common.util.JsonData;
 import com.itlin.order.dto.ProductOrderSaveDto;
@@ -17,9 +18,11 @@ import com.itlin.order.feign.CouponFeignRpc;
 import com.itlin.order.feign.ProductServiceRpc;
 import com.itlin.order.service.ProductOrderService;
 import com.itlin.redis.util.RedisUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Type;
@@ -35,6 +38,7 @@ import java.util.UUID;
  * @since 2024-04-29 19:37:37
  */
 @Service("productOrderService")
+@Slf4j
 public class ProductOrderServiceImpl implements ProductOrderService {
     @Resource
     private ProductOrderDao productOrderDao;
@@ -97,6 +101,7 @@ public class ProductOrderServiceImpl implements ProductOrderService {
 
 
     @Override
+    @Transactional
     public JsonData createOrder(ProductOrderSaveDto saveDto) {
 
         List<Integer> prductIds = saveDto.getPrductIds();
@@ -133,19 +138,50 @@ public class ProductOrderServiceImpl implements ProductOrderService {
 
         //没有扣除优惠卷的价格
         BigDecimal bigDecimal = getAmountAll(list, redisList);
-        //发起支付
 
         //锁定优惠卷
-        JsonData jsonData = couponFeignRpc.lockCoupon(saveDto.getCouponId().toString(), UUID.randomUUID().toString());
-        if (jsonData.getCode() != 0) {
-            throw new BizException(500,jsonData.getData().toString());
+        String orderId = UUID.randomUUID().toString().replace("-","").substring(0,16);
+//        JsonData jsonData = couponFeignRpc.lockCoupon(saveDto.getCouponId().toString(),orderId);
+//        if (jsonData.getCode() != 0) {
+//            throw new BizException(500, jsonData.getMsg().toString());
+//        }else {
+//            String s = jsonData.getData().toString();
+//            bigDecimal=bigDecimal.add(new BigDecimal(s));
+//        }
+        //锁定商品库存
+        ProductLockStockDto lockStockDto=new ProductLockStockDto();
+        lockStockDto.setCartItemVoList(redisList);
+        lockStockDto.setOutTradeNo(orderId);
+        JsonData productRpcRes = productServiceRpc.lockStock(lockStockDto);
+        if(productRpcRes.getCode()==0){
+            log.info("库存锁定成功....");
+        }else {
+            log.error("商品库存锁定失败.....");
+            return JsonData.buildSuccess(productRpcRes.getMsg());
         }
-        //锁定库存
+        //插入订单
+
+
+
+        //发起支付
+
 
 
 
         return JsonData.buildSuccess("<h1>你好</h1>");
 
+
+    }
+
+    @Override
+    public JsonData getByOutTrane(String outTraneId) {
+
+        ProductOrder byOutTrane = productOrderDao.getByOutTrane(outTraneId);
+        if(byOutTrane==null){
+            return JsonData.buildError("无订单");
+        }
+        String state =byOutTrane.getState();
+        return JsonData.buildSuccess(state);
 
     }
 

@@ -1,6 +1,7 @@
 package com.itlin.order.feign;
 
 import com.itlin.common.feign.dto.ProduceRpcReqDto;
+import com.itlin.common.feign.dto.ProductLockStockDto;
 import com.itlin.common.util.JsonData;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,4 +20,6 @@ public interface ProductServiceRpc {
     public JsonData getListByIds(@RequestBody ProduceRpcReqDto produceRpcReqDto);
 
 
+    @PostMapping("/api/productTask/v1/lockStock")
+    public JsonData lockStock(@RequestBody ProductLockStockDto productLockStockDto);
 }

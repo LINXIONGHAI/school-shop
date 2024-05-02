@@ -1,7 +1,7 @@
 package com.itlin.coupon.service;
 
 import com.itlin.common.emun.CouponCategoryEnum;
-import com.itlin.common.entity.LoginUser;
+import com.itlin.coupon.mq.CouponMQLockReq;
 import com.itlin.common.util.JsonData;
 import com.itlin.coupon.bo.CouponRecordBo;
 import com.itlin.coupon.entity.CouponRecord;
@@ -59,4 +59,12 @@ public interface CouponRecordService {
     JsonData loginCoupon(String userId);
 
     CouponRecord getByIdAndUserId(String couponId, String userId, String name, Date date);
+
+    /**
+     * 释放释放优惠卷
+     * @param couponMQLockReq
+     * @return
+     */
+    Boolean unlock(CouponMQLockReq couponMQLockReq);
+
 }

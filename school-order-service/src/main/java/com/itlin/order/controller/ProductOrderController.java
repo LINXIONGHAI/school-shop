@@ -8,11 +8,9 @@ import com.itlin.common.excepetion.BizException;
 import com.itlin.common.util.JsonData;
 import com.itlin.order.dto.ProductOrderSaveDto;
 import com.itlin.order.service.ProductOrderService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -75,4 +73,14 @@ public class ProductOrderController {
 
 
     }
+
+    @ApiOperation("RPC")
+    @GetMapping("/getByOutTraneId/{outTraneId}")
+    public JsonData getByOutTrane(@PathVariable("outTraneId") String outTraneId){
+        return productOrderService.getByOutTrane(outTraneId);
+
+
+    }
+
+
 }

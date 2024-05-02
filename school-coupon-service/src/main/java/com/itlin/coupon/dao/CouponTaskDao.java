@@ -71,5 +71,9 @@ public interface CouponTaskDao {
      */
     int deleteById(Long id);
 
+    CouponTask queryByOutTranceId(@Param("outTranceId")String outTranceId);
+
+    int updateState(@Param("outTranceId") String outTranceId,@Param("taskId") long taskId,
+                    @Param("state")String state);
 }
 

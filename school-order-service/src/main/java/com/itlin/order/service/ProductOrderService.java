@@ -47,4 +47,5 @@ public interface ProductOrderService {
 
     JsonData createOrder(ProductOrderSaveDto saveDto);
 
+    JsonData getByOutTrane(String outTraneId);
 }

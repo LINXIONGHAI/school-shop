@@ -65,9 +65,17 @@
             </if>
         </where>
     </select>
+    <select id="queryByOutTranceId" resultType="com.itlin.coupon.entity.CouponTask">
+        select * from coupon_task
+        where out_trade_no=#{outTranceId}
+
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        <selectKey keyProperty="id" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
         insert into coupon_task(coupon_record_id, create_time, out_trade_no, lock_state)
         values (#{couponRecordId}, #{createTime}, #{outTradeNo}, #{lockState})
     </insert>
@@ -111,6 +119,16 @@
             </if>
         </set>
         where id = #{id}
+    </update>
+    <update id="updateState">
+
+        update coupon_task
+        set lock_state=#{state}
+        where id=#{taskId}
+        and outTranceId=#{outTranceId}
+
+
+
     </update>
 
     <!--通过主键删除-->

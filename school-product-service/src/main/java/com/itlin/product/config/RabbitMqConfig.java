@@ -1,7 +1,6 @@
-package com.itlin.coupon.config;
+package com.itlin.product.config;
 
 
-import com.netflix.loadbalancer.PingUrl;
 import lombok.Data;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.Exchange;
@@ -24,37 +23,37 @@ public class RabbitMqConfig {
     /**
      * 交换机
      */
-    @Value("${mqconfig.coupon_event_exchange}")
+    @Value("${mqconfig.stock_event_exchange}")
     private String eventExchange;
 
 
     /**
      * 第一个队列延迟队列，
      */
-    @Value("${mqconfig.coupon_release_delay_queue}")
-    private String couponReleaseDelayQueue;
+    @Value("${mqconfig.stock_release_delay_queue}")
+    private String stockReleaseDelayQueue;
 
     /**
      * 第一个队列的路由key
      * 进入队列的路由key
      */
-    @Value("${mqconfig.coupon_release_delay_routing_key}")
-    private String couponReleaseDelayRoutingKey;
+    @Value("${mqconfig.stock_release_delay_routing_key}")
+    private String stockReleaseDelayRoutingKey;
 
 
     /**
      * 第二个队列，被监听恢复库存的队列
      */
-    @Value("${mqconfig.coupon_release_queue}")
-    private String couponReleaseQueue;
+    @Value("${mqconfig.stock_release_queue}")
+    private String stockReleaseQueue;
 
     /**
      * 第二个队列的路由key
      *
      * 即进入死信队列的路由key
      */
-    @Value("${mqconfig.coupon_release_routing_key}")
-    private String couponReleaseRoutingKey;
+    @Value("${mqconfig.stock_release_routing_key}")
+    private String stockReleaseRoutingKey;
 
     /**
      * 过期时间
@@ -78,7 +77,7 @@ public class RabbitMqConfig {
      * @return
      */
     @Bean
-    public Exchange couponEventExchange(){
+    public Exchange stockEventExchange(){
         return new TopicExchange(eventExchange,true,false);
     }
 
@@ -87,14 +86,14 @@ public class RabbitMqConfig {
      * 延迟队列
      */
     @Bean
-    public Queue couponReleaseDelayQueue(){
+    public Queue stockReleaseDelayQueue(){
 
         Map<String,Object> args = new HashMap<>(3);
         args.put("x-message-ttl",ttl);
-        args.put("x-dead-letter-routing-key",couponReleaseRoutingKey);
+        args.put("x-dead-letter-routing-key",stockReleaseRoutingKey);
         args.put("x-dead-letter-exchange",eventExchange);
 
-        return new Queue(couponReleaseDelayQueue,true,false,false,args);
+        return new Queue(stockReleaseDelayQueue,true,false,false,args);
     }
 
 
@@ -102,9 +101,9 @@ public class RabbitMqConfig {
      * 死信队列，普通队列，用于被监听
      */
     @Bean
-    public Queue couponReleaseQueue(){
+    public Queue stockReleaseQueue(){
 
-        return new Queue(couponReleaseQueue,true,false,false);
+        return new Queue(stockReleaseQueue,true,false,false);
 
     }
 
@@ -114,9 +113,9 @@ public class RabbitMqConfig {
      * @return
      */
     @Bean
-    public Binding couponReleaseDelayBinding(){
+    public Binding stockReleaseDelayBinding(){
 
-        return new Binding(couponReleaseDelayQueue,Binding.DestinationType.QUEUE,eventExchange,couponReleaseDelayRoutingKey,null);
+        return new Binding(stockReleaseDelayQueue,Binding.DestinationType.QUEUE,eventExchange,stockReleaseDelayRoutingKey,null);
     }
 
     /**
@@ -124,9 +123,9 @@ public class RabbitMqConfig {
      * @return
      */
     @Bean
-    public Binding couponReleaseBinding(){
+    public Binding stockReleaseBinding(){
 
-        return new Binding(couponReleaseQueue,Binding.DestinationType.QUEUE,eventExchange,couponReleaseRoutingKey,null);
+        return new Binding(stockReleaseQueue,Binding.DestinationType.QUEUE,eventExchange,stockReleaseRoutingKey,null);
     }
 
 

@@ -71,7 +71,7 @@ public interface ProductTaskDao {
      */
     int deleteById(Long id);
 
-    void lock(ProductTask productTask);
+     void lock(ProductTask productTask);
 
 }
 

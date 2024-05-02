@@ -2,19 +2,26 @@ package com.itlin.product.service.impl;
 
 import com.itlin.common.emun.CouponLockState;
 import com.itlin.common.entity.CartItemVo;
+import com.itlin.common.entity.LoginUser;
 import com.itlin.common.excepetion.BizException;
 import com.itlin.common.feign.ProductRpc;
 import com.itlin.common.feign.dto.ProduceRpcReqDto;
 import com.itlin.common.feign.dto.ProductLockStockDto;
+import com.itlin.common.local.LoginThreadLocal;
 import com.itlin.common.util.JsonData;
+import com.itlin.product.config.RabbitMqConfig;
 import com.itlin.product.dao.ProductDao;
 import com.itlin.product.entity.ProductTask;
 import com.itlin.product.dao.ProductTaskDao;
+import com.itlin.product.mq.StockLockMqDto;
 import com.itlin.product.service.ProductTaskService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -27,12 +34,19 @@ import java.util.List;
  * @since 2024-04-30 19:40:59
  */
 @Service("productTaskService")
+@Slf4j
 public class ProductTaskServiceImpl implements ProductTaskService {
     @Resource
     private ProductTaskDao productTaskDao;
 
     @Resource
     private ProductDao productDao;
+
+    @Resource
+    private RabbitTemplate rabbitTemplate;
+
+    @Resource
+    private RabbitMqConfig rabbitMqConfig;
 
     /**
      * 通过ID查询单条数据
@@ -83,6 +97,7 @@ public class ProductTaskServiceImpl implements ProductTaskService {
 
 
     @Override
+    @Transactional
     public JsonData lockStock(List<CartItemVo> cartItemVoList,String outTradeNo) {
         //判断库存和id是否存在，且库存足够
         int index = 0;
@@ -94,7 +109,7 @@ public class ProductTaskServiceImpl implements ProductTaskService {
 
         }
         if (index != cartItemVoList.size()) {
-            throw new BizException(500,"商品库存不足");
+            return JsonData.buildError("商品库存不足");
         }
         for (int i = 0; i < cartItemVoList.size(); i++) {
             CartItemVo cartItemVo = cartItemVoList.get(i);
@@ -109,9 +124,16 @@ public class ProductTaskServiceImpl implements ProductTaskService {
             productTask.setOutTradeNo(outTradeNo);
             productTaskDao.lock(productTask);
 
+            //发送Mq TODO
+            LoginUser loginUser = LoginThreadLocal.get();
+            StockLockMqDto stockLockMqDto = new StockLockMqDto();
+            stockLockMqDto.setUserId(String.valueOf(loginUser.getId()));
+            stockLockMqDto.setOutTranceId(outTradeNo);
+            stockLockMqDto.setTaskId(productTask.getId().toString());
+            rabbitTemplate.convertAndSend(rabbitMqConfig.getEventExchange(),rabbitMqConfig.getStockReleaseDelayRoutingKey(),
+                    stockLockMqDto);
         }
-
-
-        return null;
+        log.info("商品库存锁定成功。。。。。。。");
+        return JsonData.buildSuccess();
     }
 }

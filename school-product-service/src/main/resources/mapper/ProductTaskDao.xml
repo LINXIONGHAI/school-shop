@@ -108,10 +108,10 @@
         out_trade_no = values(out_trade_no),
         create_time = values(create_time)
     </insert>
-    <insert id="lock">
-         insert into product_task(product_id, buy_num, product_name, lock_state, out_trade_no, create_time)
-        values (#{productId}, #{buyNum}, #{productName}, #{lockState}, #{outTradeNo}, #{createTime})
+    <insert id="lock"  parameterType="com.itlin.product.entity.ProductTask" useGeneratedKeys="true" keyProperty="id">
 
+       INSERT INTO `product_task`( `product_id`, `buy_num`, `product_name`, `lock_state`, `out_trade_no`, `create_time`)
+        VALUES ( #{productId}, #{buyNum}, #{productName}, #{lockState}, #{outTradeNo}, #{createTime});
     </insert>
 
     <!--通过主键修改数据-->

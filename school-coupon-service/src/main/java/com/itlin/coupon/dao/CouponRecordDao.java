@@ -80,5 +80,9 @@ public interface CouponRecordDao {
 
     CouponRecord getByIdAndUserId(@Param("couponId") String couponId,@Param("userId") String userId,
                                   @Param("states")String states, @Param("date") Date date);
+
+    int updateLockStates(@Param("couponRecordId") Long couponRecordId,
+                         @Param("userId")String userId,
+                         @Param("status")String status);
 }
 
